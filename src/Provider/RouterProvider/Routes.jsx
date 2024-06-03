@@ -11,6 +11,7 @@ import Info from "../../Layout/Info/Info";
     {
       path: "/",
       element: <Main/>,
+      // Todos: set error page
     },
     {
         path: "/dashbord",
