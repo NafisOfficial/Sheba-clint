@@ -5,6 +5,8 @@ import {
 import Main from "../../Layout/Main/Main";
 import Dashbord from "../../Layout/Dashbord/Dashbord";
 import Info from "../../Layout/Info/Info";
+import Login from "../../Pages/Login/Login";
+import SignUp from "../../Pages/SignUp/SignUp";
 
 
   export const router = createBrowserRouter([
@@ -12,6 +14,15 @@ import Info from "../../Layout/Info/Info";
       path: "/",
       element: <Main/>,
       // Todos: set error page
+      children:[{
+        path: 'login',
+        element:<Login/>
+      },
+      {
+        path: 'signup',
+        element: <SignUp/>
+      }
+    ]
     },
     {
         path: "/dashbord",
