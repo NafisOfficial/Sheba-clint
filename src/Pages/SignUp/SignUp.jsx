@@ -1,25 +1,76 @@
 
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useNavigate } from 'react-router-dom';
+import { FcGoogle } from "react-icons/fc";
+import { useContext, useState } from 'react';
+import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
+import { GoogleAuthProvider, updateProfile } from 'firebase/auth';
 
 const SignUp = () => {
+    //hooks
+    const { auth, isLoading, handleSignUpByGoogle, handleSignUp } = useContext(AuthContex)
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
+
+    const emailPassSignUp = (event) => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+
+        handleSignUp(email, password)
+            .then(() => {
+                updateProfile(auth?.currentUser, {
+                    displayName: name
+                })
+                    .then(() => {
+                        isLoading(false);
+                        navigate("/", { replace: true })
+                    })
+                    .catch(()=>{
+                        setErrorMessage("Failed to update user !");
+                    })
+            })
+            .catch(() => {
+                setErrorMessage("Invalid email or password");
+            })
+
+    }
+
+    const signUpByGoogle = () => {
+        const provider = new GoogleAuthProvider();
+        handleSignUpByGoogle(provider)
+            .then(() => {
+                isLoading(false);
+                navigate("/", { replace: true })
+            })
+            .catch(() => {
+                setErrorMessage("There was a problem in your gmail account");
+            })
+    }
+
+
     return (
         <div className='flex h-screen'>
             <div className='flex flex-col bg-[#f0be61] w-8/12 items-center justify-center'>
-                <h1 className='text-5xl font-bold text-center mb-10 text-white'>Signup to your account</h1>
-                <Form action="" className='flex flex-col gap-5'>
+                <h1 className='text-5xl font-bold text-center text-white'>Signup to your account</h1>
+                <p className='text-md text-white my-3'>Signup using social network</p>
+                <button className=' p-2 bg-white hover:bg-gray-200 rounded-full' onClick={signUpByGoogle}><FcGoogle className='text-2xl' /></button>
+                <Form onSubmit={emailPassSignUp} className='flex flex-col gap-2'>
+                    <div className="divider text-white">OR</div>
                     <div className='flex flex-col gap-1'>
-                        <label htmlFor="email">Name</label>
-                        <input type="text" placeholder="Type here" className="input input-bordered input-warning w-[400px]" />
+                        <label htmlFor="name">Name</label>
+                        <input type="text" name='name' id='name' autoComplete='on' placeholder="Type here" className="input input-bordered input-warning w-[400px]" />
                     </div>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="email">Email</label>
-                        <input type="text" placeholder="Type here" className="input input-bordered input-warning w-[400px]" />
+                        <input type="email" name='email' id='email' placeholder="Type here" className="input input-bordered input-warning w-[400px]" />
                     </div>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="password">Password</label>
-                        <input type="text" placeholder="Type here" className="input input-bordered input-warning w-[400px]" />
+                        <input type="password" name='password' id='password' autoComplete='on' placeholder="Type here" className="input input-bordered input-warning w-[400px]" />
                     </div>
-                    <div className='mt-5'>
+                    {errorMessage && <p className='text-sm  text-red-600'>{errorMessage}</p>}
+                    <div className='mt-8'>
                         <input type="submit" className='btn btn-md px-8 btn-info' value="Sign Up" />
                     </div>
                 </Form>

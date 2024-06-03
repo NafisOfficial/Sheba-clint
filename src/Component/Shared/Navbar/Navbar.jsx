@@ -7,6 +7,7 @@ const Navbar = () => {
 
     const {user} = useContext(AuthContex)
 
+
     const userDropdown = <div className="dropdown dropdown-end">
     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
@@ -36,7 +37,7 @@ const Navbar = () => {
                     <div className="form-control">
                         <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
                     </div>
-                    {user? userDropdown : <Link to='/login' className="btn  btn-active btn-info">Login</Link>}
+                    {user ? userDropdown : <Link to='/login' className="btn  btn-active btn-info">Login</Link>}
                 </div>
             </div>
         </div>
