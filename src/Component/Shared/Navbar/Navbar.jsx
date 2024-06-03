@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import logo from '../../../assets/images/logos/logos.png';
 import { Link } from 'react-router-dom';
+import { AuthContex } from '../../../Provider/AuthProvider/AuthProvider';
 
 const Navbar = () => {
 
-    const [user,setUser] = useState(false)
+    const {user} = useContext(AuthContex)
 
     const userDropdown = <div className="dropdown dropdown-end">
     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
