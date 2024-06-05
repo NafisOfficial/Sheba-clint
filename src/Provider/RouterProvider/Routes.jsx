@@ -10,6 +10,7 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import Profile from "../../Pages/Profile/Profile";
 import Home from "../../Pages/Home/Home";
 import GenericPage from "../../Pages/GenericPage/GenericPage";
+import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
 
 
 export const router = createBrowserRouter([
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
     {
       path: 'profile',
       element: <Profile />
+    },
+    {
+      path:'update-profile',
+      element:<UpdateProfile/>
     },
     {
       path: "/generic/:name",
