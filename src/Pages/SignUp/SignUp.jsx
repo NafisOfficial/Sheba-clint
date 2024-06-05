@@ -1,10 +1,10 @@
 
-import { Form, Link, useNavigate } from 'react-router-dom';
-import { FcGoogle } from "react-icons/fc";
-import { useContext, useState } from 'react';
-import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
 import { GoogleAuthProvider, updateProfile } from 'firebase/auth';
+import { useContext, useState } from 'react';
+import { FcGoogle } from "react-icons/fc";
+import { Form, Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
 
 const SignUp = () => {
     //hooks
@@ -31,7 +31,7 @@ const SignUp = () => {
                     photoURL: "https://i.ibb.co/GtWpN1b/image.png"
                 })
                     .then(() => {
-                        fetch('http://localhost:3000/users', {
+                        fetch('https://sheba-server.vercel.app/users', {
                             method: "POST",
                             headers: {
                                 'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ const SignUp = () => {
                 userObject.photoURl = user?.photoURL || "https://i.ibb.co/GtWpN1b/image.png"
 
 
-                fetch('http://localhost:3000/users', {
+                fetch('https://sheba-server.vercel.app/users', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'

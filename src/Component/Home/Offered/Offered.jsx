@@ -9,7 +9,7 @@ const Offered = () => {
     }
 
     useEffect(()=>{
-        fetch('http://localhost:3000/drugs/category?company_name=Renata%20Limited')
+        fetch('https://sheba-server.vercel.app/drugs/category?company_name=Renata%20Limited')
         .then(res=>res.json())
         .then(data=>setOfferedProduct(data))
     },[])

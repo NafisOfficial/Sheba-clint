@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
 import { Form, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
 
 
 
@@ -26,7 +26,7 @@ const UpdateProfile = () => {
 
         const userObject = {email: user?.email,name,bloodGroup,age,phone,village,post_name,zip_code,police_line,district,division}
 
-        fetch(`http://localhost:3000/users/update/${user?.email}`,{
+        fetch(`https://sheba-server.vercel.app/users/update/${user?.email}`,{
             method:"PATCH",
             headers:{
                 "Content-Type": "application/json"

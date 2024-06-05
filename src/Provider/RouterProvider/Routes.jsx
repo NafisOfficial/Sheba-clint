@@ -2,17 +2,17 @@
 import {
   createBrowserRouter,
 } from "react-router-dom";
-import Main from "../../Layout/Main/Main";
 import Dashbord from "../../Layout/Dashbord/Dashbord";
-import Login from "../../Pages/Login/Login";
-import SignUp from "../../Pages/SignUp/SignUp";
-import Profile from "../../Pages/Profile/Profile";
-import Home from "../../Pages/Home/Home";
-import GenericPage from "../../Pages/GenericPage/GenericPage";
-import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
+import Main from "../../Layout/Main/Main";
 import AllMedicine from "../../Pages/AllMedicine/AllMedicine";
-import News from "../../Pages/News/News";
+import GenericPage from "../../Pages/GenericPage/GenericPage";
+import Home from "../../Pages/Home/Home";
 import InfoPage from "../../Pages/InfoPage/InfoPage";
+import Login from "../../Pages/Login/Login";
+import News from "../../Pages/News/News";
+import Profile from "../../Pages/Profile/Profile";
+import SignUp from "../../Pages/SignUp/SignUp";
+import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
 
 
 export const router = createBrowserRouter([
@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
     {
       path: 'all-medicine',
       element:<AllMedicine/>,
-      loader:()=>fetch("http://localhost:3000/drugs/all-drugs")
+      loader:()=>fetch("https://sheba-server.vercel.app/drugs/all-drugs")
     },
     {
       path:'update-profile',
@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
       loader: ({ params }) => {
         let name = params.name
         name = name.replace(/:/g,'');
-        return fetch(`http://localhost:3000/drugs/category?generic=${name}`)
+        return fetch(`https://sheba-server.vercel.app/drugs/category?generic=${name}`)
           .then(res => res.json())
           .then(data => {
             return data;

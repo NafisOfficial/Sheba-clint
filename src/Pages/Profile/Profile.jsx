@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
-import { AuthContex } from "../../Provider/AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
+import { AuthContex } from "../../Provider/AuthProvider/AuthProvider";
 
 
 const Profile = () => {
@@ -13,7 +13,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/users/${user?.email}`)
+                const response = await fetch(`https://sheba-server.vercel.app/users/${user?.email}`)
                 const json = await response.json()
                 setdbUser(json)
             } catch (error) {
