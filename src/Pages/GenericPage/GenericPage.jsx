@@ -7,7 +7,6 @@ const GenericPage = () => {
 
     const generName = datas[0]?.generic
 
-    console.log(generName);
     return (
         <div>
             <h1 className='mb-5 mt-10 text-2xl font-bold text-center'>All {generName} generic datas Are here</h1>
