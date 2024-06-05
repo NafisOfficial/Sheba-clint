@@ -9,6 +9,7 @@ import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import Profile from "../../Pages/Profile/Profile";
 import Home from "../../Pages/Home/Home";
+import GenericPage from "../../Pages/GenericPage/GenericPage";
 
 
   export const router = createBrowserRouter([
@@ -31,6 +32,20 @@ import Home from "../../Pages/Home/Home";
       {
         path: 'profile',
         element: <Profile/>
+      },
+      {
+        path: "/generic/:name",
+        element: <GenericPage/>,
+        loader: ({params})=>{
+          let name = params.name
+          name = name.replace(/:/g, '');
+          return fetch(`http://localhost:3000/drugs/category?generic=${name}`)
+          .then(res=>res.json())
+          .then(data=>{
+            return data;
+          })
+          .catch((error)=>console.log(error))
+        }
       }
     ]
     },
