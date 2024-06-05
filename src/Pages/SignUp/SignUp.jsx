@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useContext, useState } from 'react';
 import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
 import { GoogleAuthProvider, updateProfile } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
     //hooks
@@ -11,26 +12,43 @@ const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
+    const userObject = {}
+
     const emailPassSignUp = (event) => {
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
 
+        userObject.name = name;
+        userObject.email = email;
+        userObject.photoURl = "https://i.ibb.co/GtWpN1b/image.png"
+
         handleSignUp(email, password)
             .then(() => {
                 updateProfile(auth?.currentUser, {
-                    displayName: name
+                    displayName: name,
+                    photoURL: "https://i.ibb.co/GtWpN1b/image.png"
                 })
                     .then(() => {
+                        fetch('http://localhost:3000/users', {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(userObject)
+                        }
+                        )
                         isLoading(false);
-                        navigate("/", { replace: true })
+                        navigate("/", { replace: true });
+                        toast.success("Signup successful");
                     })
-                    .catch(()=>{
+                    .catch(() => {
                         setErrorMessage("Failed to update user !");
                     })
             })
             .catch(() => {
+                toast.error("Failed to signup")
                 setErrorMessage("Invalid email or password");
             })
 
@@ -39,11 +57,28 @@ const SignUp = () => {
     const signUpByGoogle = () => {
         const provider = new GoogleAuthProvider();
         handleSignUpByGoogle(provider)
-            .then(() => {
+            .then((userCredintial) => {
+
+                const user = userCredintial.user;
+                userObject.name = user?.displayName;
+                userObject.email = user?.email;
+                userObject.photoURl = user?.photoURL || "https://i.ibb.co/GtWpN1b/image.png"
+
+
+                fetch('http://localhost:3000/users', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userObject)
+                })
+
                 isLoading(false);
                 navigate("/", { replace: true })
+                toast.success("Signup successful");
             })
             .catch(() => {
+                toast.error("Failed to signup");
                 setErrorMessage("There was a problem in your gmail account");
             })
     }

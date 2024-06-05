@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { Form, Link, useNavigate } from 'react-router-dom';
 import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -18,6 +19,7 @@ const Login = () => {
         .then(()=>{
             isLoading(false);
             navigate("/",{replace: true})
+            toast.success("Login successful")
         })
         .catch(()=>{
             setErrorMessage("Please check your email or password is not correct")
