@@ -4,13 +4,15 @@ import {
 } from "react-router-dom";
 import Main from "../../Layout/Main/Main";
 import Dashbord from "../../Layout/Dashbord/Dashbord";
-import Info from "../../Layout/Info/Info";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import Profile from "../../Pages/Profile/Profile";
 import Home from "../../Pages/Home/Home";
 import GenericPage from "../../Pages/GenericPage/GenericPage";
 import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
+import AllMedicine from "../../Pages/AllMedicine/AllMedicine";
+import News from "../../Pages/News/News";
+import InfoPage from "../../Pages/InfoPage/InfoPage";
 
 
 export const router = createBrowserRouter([
@@ -35,11 +37,20 @@ export const router = createBrowserRouter([
       element: <Profile />
     },
     {
+      path: 'all-medicine',
+      element:<AllMedicine/>,
+      loader:()=>fetch("http://localhost:3000/drugs/all-drugs")
+    },
+    {
       path:'update-profile',
       element:<UpdateProfile/>
     },
     {
-      path: "/generic/:name",
+      path:'news',
+      element:<News/>
+    },
+    {
+      path: "generic/:name",
       element: <GenericPage />,
       loader: ({ params }) => {
         let name = params.name
@@ -51,15 +62,15 @@ export const router = createBrowserRouter([
           })
           .catch((error) => console.log(error))
       }
+    },
+    {
+      path: "/info",
+      element: <InfoPage />
     }
     ]
   },
   {
     path: "/dashbord",
     element: <Dashbord />
-  },
-  {
-    path: "/info",
-    element: <Info />
   }
 ]);

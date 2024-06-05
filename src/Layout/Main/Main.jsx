@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from '../../Component/Shared/Navbar/Navbar';
 import { ToastContainer } from 'react-toastify';
+import Footer from '../../Component/Shared/Footer/Footer';
 
 const Main = () => {
     return (
         <div>
             <Navbar/>
             <Outlet/>
+            <Footer/>
             <ToastContainer
                 position="top-right"
                 autoClose={2000}

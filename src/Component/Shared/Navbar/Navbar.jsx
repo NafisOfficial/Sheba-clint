@@ -48,10 +48,13 @@ const Navbar = () => {
                         <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
                     </div>
                     <div className='mx-3'>
+                        <Link to="/all-medicine">All medicine</Link>
+                    </div>
+                    <div className='mx-3'>
                         <Link to="/info">Info</Link>
                     </div>
                     <div>
-                        <Link to="/News ">News</Link>
+                        <Link to="/news">News</Link>
                     </div>
                     <div>
                         <button className='p-2 rounded-full hover:bg-orange-300'><IoCartOutline className='text-3xl' /></button>
