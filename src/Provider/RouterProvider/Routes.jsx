@@ -8,6 +8,7 @@ import Info from "../../Layout/Info/Info";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import Profile from "../../Pages/Profile/Profile";
+import Home from "../../Pages/Home/Home";
 
 
   export const router = createBrowserRouter([
@@ -16,6 +17,10 @@ import Profile from "../../Pages/Profile/Profile";
       element: <Main/>,
       // Todos: set error page
       children:[{
+        path: '/',
+        element:<Home/>
+      },
+        {
         path: 'login',
         element:<Login/>
       },
@@ -24,7 +29,7 @@ import Profile from "../../Pages/Profile/Profile";
         element: <SignUp/>
       },
       {
-        path: '/profile',
+        path: 'profile',
         element: <Profile/>
       }
     ]

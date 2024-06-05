@@ -39,7 +39,7 @@ const Navbar = () => {
 
 
     return (
-        <div className='sticky top-0'>
+        <div className='sticky top-0 z-30'>
             <div className="navbar bg-[#D6AD60] ]">
                 <div className="flex-1">
                     <Link to="/" className="btn btn-ghost text-xl"><img className='h-5 w-5' src={logo} alt="logo" />Sheba</Link>
