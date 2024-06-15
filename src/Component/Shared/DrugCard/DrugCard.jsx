@@ -9,12 +9,12 @@ const DrugCard = ({ data, offer }) => {
     }
 
     return (
-        <div className='m-5'>
+        <div className='md:m-5 m-1'>
             <div className="card w-auto bg-white shadow-xl">
                 <figure>
-                    <img src={data.drugImg} alt={data?.form} className="rounded-xl h-32 w-32" />
+                    <img src={data.drugImg} alt={data?.form} className="rounded-xl md:h-32 md:w-32 h-20 w-20" />
                 </figure>
-                <div className="px-5 items-left ">
+                <div className="md:px-5 px-3 items-left ">
                     <div className="h-44">
                         <h2 className="card-title text-2xl">{data?.brand}<sub className='text-sm mt-2'>{data?.dose}</sub></h2>
                         <p><span className="font-semibold">Form:</span> {data.form}</p>

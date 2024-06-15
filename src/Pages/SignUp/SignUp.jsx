@@ -85,8 +85,8 @@ const SignUp = () => {
 
 
     return (
-        <div className='flex h-screen'>
-            <div className='flex flex-col bg-[#f0be61] w-8/12 items-center justify-center'>
+        <div className='flex md:flex-row flex-col h-screen'>
+            <div className='flex flex-col bg-[#f0be61] md:w-8/12 w-full items-center justify-center'>
                 <h1 className='text-5xl font-bold text-center text-white'>Signup to your account</h1>
                 <p className='text-md text-white my-3'>Signup using social network</p>
                 <button className=' p-2 bg-white hover:bg-gray-200 rounded-full' onClick={signUpByGoogle}><FcGoogle className='text-2xl' /></button>
@@ -105,15 +105,15 @@ const SignUp = () => {
                         <input type="password" name='password' id='password' autoComplete='on' placeholder="Type here" className="input input-bordered input-warning w-[400px]" />
                     </div>
                     {errorMessage && <p className='text-sm  text-red-600'>{errorMessage}</p>}
-                    <div className='mt-8'>
+                    <div className='md:mt-8 my-3 md:text-left text-center'>
                         <input type="submit" className='btn btn-md px-8 btn-info' value="Sign Up" />
                     </div>
                 </Form>
             </div>
-            <div className='flex flex-col gap-10 px-5 bg-white text-[#F0BE61]  w-4/12 text-center justify-center items-center'>
+            <div className='flex flex-col md:gap-10 gap-5 px-5 md:py-0 py-3  bg-white text-[#F0BE61]  md:w-4/12 w-full text-center justify-center items-center'>
                 <h1 className='text-5xl font-bold'>Have an account ?</h1>
                 <p>If you already have na account you have to login</p>
-                <Link to='/login' className='btn border-none rounded-md btn-info px-8'>Login</Link>
+                <Link to='/login' className='btn border-none rounded-md btn-info px-8 '>Login</Link>
             </div>
         </div>
     );

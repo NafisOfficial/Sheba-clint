@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DrugCard from '../../Shared/DrugCard/DrugCard';
 
 const Offered = () => {
@@ -14,7 +14,7 @@ const Offered = () => {
         .then(data=>setOfferedProduct(data))
     },[])
     return (
-        <div className='grid grid-cols-4'>
+        <div className='grid md:grid-cols-4 grid-cols-2'>
            {offeredProduts?.map(data=><DrugCard key={data._id} data={data} offer={offer}/>)}
         </div>
     );
