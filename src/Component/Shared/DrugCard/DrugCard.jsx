@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { IoCartOutline } from "react-icons/io5";
 import { AuthContex } from "../../../Provider/AuthProvider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const DrugCard = ({ data, offer }) => {
 
@@ -18,18 +19,19 @@ const DrugCard = ({ data, offer }) => {
     }
 
     const addToCart = ()=>{
-        const cartObject = {drugId: _id,drugImg: data.drugImg,form,brand,dose,generic,price_per_unit }
+        
         if(user){
+            const cartObject = {drugId: _id,drugImg: data.drugImg,form,brand,dose,generic,price_per_unit,userEmail: user.email }
             fetch('http://localhost:3000/carts',{
                 method: "POST",
                 headers:{
                     "Content-type":"Application/json"
                 },
                 body: JSON.stringify(cartObject)
-            }).then((data)=>{
-                console.log(data);
-            }).catch((error)=>{
-                console.log(error);
+            }).then(()=>{
+                toast.success("Added to the cart");
+            }).catch(()=>{
+                toast.error("Failed to add cart");
             })
         }else{
             navigate('/login',{state: {from: location}});
