@@ -13,6 +13,8 @@ import News from "../../Pages/News/News";
 import Profile from "../../Pages/Profile/Profile";
 import SignUp from "../../Pages/SignUp/SignUp";
 import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
+import Carts from "../../Pages/Carts/Carts";
+import { toast } from "react-toastify";
 
 
 export const router = createBrowserRouter([
@@ -46,6 +48,10 @@ export const router = createBrowserRouter([
       element:<UpdateProfile/>
     },
     {
+      path:'/carts',
+      element:<Carts/>
+    },
+    {
       path:'news',
       element:<News/>
     },
@@ -60,7 +66,7 @@ export const router = createBrowserRouter([
           .then(data => {
             return data;
           })
-          .catch((error) => console.log(error))
+          .catch(() => toast.error("There was a server side error"))
       }
     },
     {
