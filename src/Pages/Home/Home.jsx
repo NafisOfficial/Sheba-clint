@@ -2,6 +2,7 @@ import Banner from '../../Component/Home/Banner/Banner';
 import Generic from '../../Component/Home/Generic/Generic';
 import MostOrdered from '../../Component/Home/MostOrdered/MostOrdered';
 import Offered from '../../Component/Home/Offered/Offered';
+import ViewAll from '../../Component/Home/ViewAll/ViewAll';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <MostOrdered/>
             <div className="divider divider-start ms-4 text-2xl">Free home delivery</div>
             <Offered/>
+            <ViewAll/>
         </div>
     );
 };

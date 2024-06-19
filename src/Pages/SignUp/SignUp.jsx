@@ -2,7 +2,7 @@
 import { GoogleAuthProvider, updateProfile } from 'firebase/auth';
 import { useContext, useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
-import { Form, Link, useNavigate } from 'react-router-dom';
+import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
 
@@ -11,6 +11,8 @@ const SignUp = () => {
     const { auth, isLoading, handleSignUpByGoogle, handleSignUp } = useContext(AuthContex)
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || "/";
 
     const userObject = {}
 
@@ -31,7 +33,7 @@ const SignUp = () => {
                     photoURL: "https://i.ibb.co/GtWpN1b/image.png"
                 })
                     .then(() => {
-                        fetch('https://sheba-server.vercel.app/users', {
+                        fetch('http://localhost:3000/users', {
                             method: "POST",
                             headers: {
                                 'Content-Type': 'application/json'
@@ -40,7 +42,7 @@ const SignUp = () => {
                         }
                         )
                         isLoading(false);
-                        navigate("/", { replace: true });
+                        navigate(from, { replace: true });
                         toast.success("Signup successful");
                     })
                     .catch(() => {
@@ -65,7 +67,7 @@ const SignUp = () => {
                 userObject.photoURl = user?.photoURL || "https://i.ibb.co/GtWpN1b/image.png"
 
 
-                fetch('https://sheba-server.vercel.app/users', {
+                fetch('http://localhost:3000/users', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
@@ -74,12 +76,12 @@ const SignUp = () => {
                 })
 
                 isLoading(false);
-                navigate("/", { replace: true })
+                navigate(from, { replace: true })
                 toast.success("Signup successful");
             })
             .catch(() => {
                 toast.error("Failed to signup");
-                setErrorMessage("There was a problem in your gmail account");
+                setErrorMessage("There was a problem in server");
             })
     }
 

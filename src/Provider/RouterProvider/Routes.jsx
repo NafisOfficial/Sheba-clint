@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
     {
       path: 'all-medicine',
       element:<AllMedicine/>,
-      loader:()=>fetch("https://sheba-server.vercel.app/drugs/all-drugs")
+      loader:()=>fetch("http://localhost:3000/drugs/all-drugs")
     },
     {
       path:'update-profile',
@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
       loader: ({ params }) => {
         let name = params.name
         name = name.replace(/:/g,'');
-        return fetch(`https://sheba-server.vercel.app/drugs/category?generic=${name}`)
+        return fetch(`http://localhost:3000/drugs/category?generic=${name}`)
           .then(res => res.json())
           .then(data => {
             return data;

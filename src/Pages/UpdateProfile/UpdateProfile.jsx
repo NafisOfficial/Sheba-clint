@@ -26,7 +26,7 @@ const UpdateProfile = () => {
 
         const userObject = {email: user?.email,name,bloodGroup,age,phone,village,post_name,zip_code,police_line,district,division}
 
-        fetch(`https://sheba-server.vercel.app/users/update/${user?.email}`,{
+        fetch(`http://localhost:3000/users/update/${user?.email}`,{
             method:"PATCH",
             headers:{
                 "Content-Type": "application/json"

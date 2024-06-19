@@ -5,7 +5,7 @@ const MostOrdered = () => {
     const [druglist,setDruglist] = useState([]);
 
     useEffect(()=>{
-        fetch("https://sheba-server.vercel.app/drugs/most-ordered")
+        fetch("http://localhost:3000/drugs/most-ordered")
         .then((res)=>res.json())
         .then((result)=>setDruglist(result))
     },[])

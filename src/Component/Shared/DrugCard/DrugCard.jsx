@@ -1,6 +1,15 @@
+import { useContext } from "react";
 import { IoCartOutline } from "react-icons/io5";
+import { AuthContex } from "../../../Provider/AuthProvider/AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const DrugCard = ({ data, offer }) => {
+
+    const {_id,form,brand,dose,generic,price_per_unit,company_name} = data;
+    const {user} = useContext(AuthContex)
+    const navigate = useNavigate();
+    const location = useLocation();
+
 
     if (data?.form === "tablet") {
         data.drugImg = "https://i.ibb.co/JQ8tMXX/tablets2.png"
@@ -8,23 +17,42 @@ const DrugCard = ({ data, offer }) => {
         data.drugImg = "https://i.ibb.co/rmR7nyV/capsules3.png"
     }
 
+    const addToCart = ()=>{
+        const cartObject = {drugId: _id,drugImg: data.drugImg,form,brand,dose,generic,price_per_unit }
+        if(user){
+            fetch('http://localhost:3000/carts',{
+                method: "POST",
+                headers:{
+                    "Content-type":"Application/json"
+                },
+                body: JSON.stringify(cartObject)
+            }).then((data)=>{
+                console.log(data);
+            }).catch((error)=>{
+                console.log(error);
+            })
+        }else{
+            navigate('/login',{state: {from: location}});
+        }
+    }
+
     return (
         <div className='md:m-5 m-1'>
             <div className="card w-auto bg-white shadow-xl">
                 <figure>
-                    <img src={data.drugImg} alt={data?.form} className="rounded-xl md:h-32 md:w-32 h-20 w-20" />
+                    <img src={data.drugImg} alt={form} className="rounded-xl md:h-32 md:w-32 h-20 w-20" />
                 </figure>
                 <div className="md:px-5 px-3 items-left ">
                     <div className="h-44">
-                        <h2 className="card-title text-2xl">{data?.brand}<sub className='text-sm mt-2'>{data?.dose}</sub></h2>
-                        <p><span className="font-semibold">Form:</span> {data.form}</p>
-                        <p><span className="font-semibold">Generic:</span> {data.generic}</p>
-                        <p><span className="font-semibold">Price per unit:</span> {data.price_per_unit} BDT</p>
-                        <p><span className="font-semibold">Manufaturer:</span> {data.company_name}</p>
+                        <h2 className="card-title text-2xl">{brand}<sub className='text-sm mt-2'>{dose}</sub></h2>
+                        <p><span className="font-semibold">Form:</span> {form}</p>
+                        <p><span className="font-semibold">Generic:</span> {generic}</p>
+                        <p><span className="font-semibold">Price per unit:</span> {price_per_unit} BDT</p>
+                        <p><span className="font-semibold">Manufaturer:</span> {company_name}</p>
                     </div>
                     <div className="card-actions mb-5">
                         {offer?.isOffered && <p className="text-blue-700 text-sm">{offer?.details}</p>}
-                        <button className="btn btn-sm ms-auto btn-info rounded-full"><IoCartOutline className="text-xl" /></button>
+                        <button onClick={addToCart} className="btn btn-sm ms-auto btn-info rounded-full"><IoCartOutline className="text-xl" /></button>
                     </div>
                 </div>
             </div>

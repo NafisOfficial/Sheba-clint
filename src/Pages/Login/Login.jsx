@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Form, Link, useNavigate } from 'react-router-dom';
+import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
 import { toast } from 'react-toastify';
 
@@ -9,6 +9,8 @@ const Login = () => {
     const {handleLogin,isLoading} = useContext(AuthContex);
     const [errorMessage,setErrorMessage] = useState("")
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || "/";
 
     const login=(event)=>{
         event.preventDefault();
@@ -18,7 +20,7 @@ const Login = () => {
         handleLogin(Email,Password)
         .then(()=>{
             isLoading(false);
-            navigate("/",{replace: true})
+            navigate(from,{replace: true})
             toast.success("Login successful")
         })
         .catch(()=>{
