@@ -15,6 +15,7 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
 import Carts from "../../Pages/Carts/Carts";
 import { toast } from "react-toastify";
+import ProivateRoute from "../../Component/Shared/PrivateRoute/ProivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -49,7 +50,7 @@ export const router = createBrowserRouter([
     },
     {
       path:'/carts',
-      element:<Carts/>
+      element:<ProivateRoute><Carts/></ProivateRoute>
     },
     {
       path:'news',

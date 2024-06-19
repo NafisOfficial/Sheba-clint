@@ -1,7 +1,8 @@
 import { MdDelete } from "react-icons/md";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { toast } from "react-toastify";
 
-const CartDetails = ({ data, refatch }) => {
+const CartDetails = ({ data, refetch }) => {
 
 
     const handlePlus = () => {
@@ -13,12 +14,23 @@ const CartDetails = ({ data, refatch }) => {
     }
 
     const handleDelete = () => {
-        
+        fetch(`http://localhost:3000/carts/singleCart?email=${data?.userEmail}&&id=${data?._id}`,{
+            method: "DELETE"
+        })
+        .then(()=>{
+            refetch();
+        })
+        .catch(()=>{
+            toast.error("There is a server side error");
+        })
     }
+
     const noItem = <td>No item available in cart</td>
+
+
     return (
         <tr>
-            {data ? <>
+            {data.length>0 ? <>
                 <td><div>
                     <p className='font-bold'>{data?.brand}</p>
                     <p>{data?.form}</p>
