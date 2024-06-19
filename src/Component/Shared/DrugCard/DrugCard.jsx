@@ -3,6 +3,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { AuthContex } from "../../../Provider/AuthProvider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useCart from "../../../Hooks/useCart";
 
 const DrugCard = ({ data, offer }) => {
 
@@ -10,6 +11,7 @@ const DrugCard = ({ data, offer }) => {
     const {user} = useContext(AuthContex)
     const navigate = useNavigate();
     const location = useLocation();
+    const [refetch] = useCart();
 
 
     if (data?.form === "tablet") {
@@ -29,6 +31,7 @@ const DrugCard = ({ data, offer }) => {
                 },
                 body: JSON.stringify(cartObject)
             }).then(()=>{
+                refetch();
                 toast.success("Added to the cart");
             }).catch(()=>{
                 toast.error("Failed to add cart");

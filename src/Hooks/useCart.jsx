@@ -12,10 +12,12 @@ const useCart = () => {
         return result.json();
     }
 
-    const {data} = useQuery({
-        queryKey: ["allCarts",user?.email],
+    const {refetch,data: allCarts = []} = useQuery({
+        queryKey: ["carts",user?.email],
         queryFn: fetchCart
     })
+
+    return [refetch,allCarts]
 };
 
 export default useCart;
