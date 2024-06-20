@@ -9,9 +9,9 @@ export const AuthContex = createContext(null)
 
 const AuthProvider = ( {children} ) => {
     const auth = getAuth(app);
-    const [loading,isLoading] = useState(true)
-    const [user,setUser] = useState(null)
-    const [dbUser,setdbUser] = useState([])
+    const [loading,isLoading] = useState(true);
+    const [user,setUser] = useState(null);
+    const [dbUser,setdbUser] = useState([]);
 
     const handleLogin=(email,password)=>{
         return signInWithEmailAndPassword(auth,email,password)
@@ -52,7 +52,7 @@ const AuthProvider = ( {children} ) => {
         handleLogin,
         handleSignUp,
         handleSignUpByGoogle,
-        handleLogOut
+        handleLogOut,
     }
 
     return (

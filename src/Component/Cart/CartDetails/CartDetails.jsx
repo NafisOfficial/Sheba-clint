@@ -1,50 +1,72 @@
 import { MdDelete } from "react-icons/md";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
-const CartDetails = ({ data, refetch }) => {
+const CartDetails = ({ data, object }) => {
+
+    const [amount, setAmount] = useState(1);
+    const { refetch,totalSum, setTotalSum } = object;
 
 
     const handlePlus = () => {
 
+        setAmount((prevAmount) => {
+            let newAmount = prevAmount + 1;
+            setTotalSum(() => {
+                let newSum = totalSum + data.price_per_unit;
+                return newSum;
+            });
+            return newAmount;
+        })
+
     }
 
     const handleMinus = () => {
-
+        if (amount > 1) {
+            setAmount((prevAmount) => {
+                let newAmount;
+                newAmount = prevAmount - 1;
+                setTotalSum(() => {
+                    let newSum = totalSum - data.price_per_unit;
+                    return newSum;
+                });
+                return newAmount;
+            })
+        }
     }
 
-    const handleDelete = () => {
-        fetch(`http://localhost:3000/carts/singleCart?email=${data?.userEmail}&&id=${data?._id}`,{
+
+
+    const handleDelete = (id) => {
+        fetch(`http://localhost:3000/carts/singleCart?email=${data?.userEmail}&&id=${id}`, {
             method: "DELETE"
         })
-        .then(()=>{
-            refetch();
-        })
-        .catch(()=>{
-            toast.error("There is a server side error");
-        })
+            .then(() => {
+                refetch();
+            })
+            .catch(() => {
+                toast.error("There is a server side error");
+            })
     }
 
-    const noItem = <td>No item available in cart</td>
 
 
     return (
         <tr>
-            {data.length>0 ? <>
-                <td><div>
-                    <p className='font-bold'>{data?.brand}</p>
-                    <p>{data?.form}</p>
-                    <p>{data?.dose}</p>
-                </div></td>
-                <td>{data?.price_per_unit} BDT</td>
-                <td><div className="flex gap-3 items-center">
-                    <p><FaMinus className="cursor-pointer" onClick={handleMinus} /></p>
-                    <p>1</p>
-                    <p><FaPlus className="cursor-pointer" onClick={handlePlus} /></p>
-                </div></td>
-                <td>{5 * data?.price_per_unit} BDT</td>
-                <td><MdDelete className="text-lg cursor-pointer" onClick={handleDelete} /></td>
-            </> : noItem}
+            <td><div>
+                <p className='font-bold'>{data?.brand}</p>
+                <p>{data?.form}</p>
+                <p>{data?.dose}</p>
+            </div></td>
+            <td>{data?.price_per_unit} BDT</td>
+            <td><div className="flex gap-3 items-center">
+                <p><FaMinus className="cursor-pointer" onClick={() => handleMinus(data._id)} /></p>
+                <p>{amount}</p>
+                <p><FaPlus className="cursor-pointer" onClick={() => handlePlus(data._id)} /></p>
+            </div></td>
+            <td>{(amount * data?.price_per_unit).toFixed(2)} BDT</td>
+            <td><MdDelete className="text-lg cursor-pointer" onClick={() => handleDelete(data._id)} /></td>
         </tr>
     );
 };
