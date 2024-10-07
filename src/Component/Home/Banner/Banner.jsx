@@ -6,23 +6,23 @@ import img3 from '../../../assets/images/banners/flash-cell.jpg'
 import img4 from '../../../assets/images/banners/Supper-sell.jpg'
 const Banner = () => {
 
-    
+
 
     return (
         <Carousel showArrows={true} autoPlay={true} >
-                <div className="h-[400px]">
-                    <img className="h-full " src={img1} />
-                </div>
-                <div className="h-[400px]">
-                    <img className="h-full " src={img2} />
-                </div>
-                <div className="h-[400px]">
-                    <img className="h-full " src={img3} />
-                </div>
-                <div className="h-[400px]">
-                    <img className="h-full " src={img4} />
-                </div>
-            </Carousel>
+            <div className="h-[400px]">
+                <img className="h-full " src={img1} />
+            </div>
+            <div className="h-[400px]">
+                <img className="h-full " src={img2} />
+            </div>
+            <div className="h-[400px]">
+                <img className="h-full " src={img3} />
+            </div>
+            <div className="h-[400px]">
+                <img className="h-full " src={img4} />
+            </div>
+        </Carousel>
     );
 };
 

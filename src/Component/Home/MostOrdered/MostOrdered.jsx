@@ -11,7 +11,7 @@ const MostOrdered = () => {
     },[])
 
     return (
-        <div className="grid md:grid-cols-4 grid-cols-2">
+        <div className="grid grid-cols-2 gap-2 mx-3 md:grid-cols-4 ">
             {druglist.map(drug=><DrugCard key={drug._id} data={drug}/>)}
         </div>
     );

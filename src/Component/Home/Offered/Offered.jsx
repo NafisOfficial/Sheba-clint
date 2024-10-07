@@ -14,7 +14,7 @@ const Offered = () => {
         .then(data=>setOfferedProduct(data))
     },[])
     return (
-        <div className='grid md:grid-cols-4 grid-cols-2'>
+        <div className='grid grid-cols-2 gap-2 mx-3 md:grid-cols-4'>
            {offeredProduts?.map(data=><DrugCard key={data._id} data={data} offer={offer}/>)}
         </div>
     );
