@@ -42,7 +42,7 @@ const DrugCard = ({ data, offer }) => {
     }
 
     return (
-        <div className='md:m-5'>
+        <div>
             <div className="card w-auto bg-white shadow-xl">
                 <figure>
                     <img src={data.drugImg} alt={form} className="rounded-xl md:h-32 md:w-32 h-20 w-20" />
@@ -51,10 +51,10 @@ const DrugCard = ({ data, offer }) => {
                     <div className="h-22 md:h-44">
                         <h2 className="card-title text-lg md:text-2xl">{brand}<sub className='text-sm my-2'>{dose}</sub></h2>
                         <div>
-                            <p className="text-sm md:text-lg"><span className="font-bold">Form:</span> {form}</p>
-                            <p className="text-sm md:text-lg"><span className="font-bold">Generic:</span> {generic}</p>
-                            <p className="text-sm md:text-lg"><span className="font-bold">Price per unit:</span> {price_per_unit} BDT</p>
-                            <p className="text-sm md:text-lg"><span className="font-bold">Manufaturer:</span> {company_name}</p>
+                            <p className="text-sm md:text-base"><span className="font-bold">Form:</span> {form}</p>
+                            <p className="text-sm md:text-base"><span className="font-bold">Generic:</span> {generic}</p>
+                            <p className="text-sm md:text-base"><span className="font-bold">Price per unit:</span> {price_per_unit} BDT</p>
+                            <p className="text-sm md:text-base"><span className="font-bold">Manufaturer:</span> {company_name}</p>
                         </div>
                     </div>
                     <div className="card-actions mb-5">
