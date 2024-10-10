@@ -35,6 +35,7 @@ const Navbar = () => {
                     Profile
                 </Link>
             </li>
+            <li><Link to="/history">History</Link></li>
             <li><button onClick={signOut}>Logout</button></li>
         </ul>
     </div>

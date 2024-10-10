@@ -5,19 +5,32 @@ import { AuthContex } from "../Provider/AuthProvider/AuthProvider";
 
 
 const useCart = () => {
-    const {user} = useContext(AuthContex);
+    const { user } = useContext(AuthContex);
 
-    const fetchCart = async () =>{
-        const result = await fetch(`http://localhost:3000/carts?email=${user?.email}`)
-        return result.json();
+    if (!user?.email) {
+        return [];
+    }
+    try {
+        const fetchCart = async () => {
+            const result = await fetch(`http://localhost:3000/carts?email=${user?.email}`)
+            if(!result.ok){
+                throw new Error("Failed to fetch cart data")
+            }
+            return result.json();
+        }
+
+        const { refetch, data: allCarts = [] } = useQuery({
+            queryKey: ["carts", user?.email],
+            queryFn: fetchCart,
+            enabled:!!user?.email
+        })
+    
+        return [refetch, allCarts]
+    } catch (error) {
+        console.log("Error to fetching cart",error);
+        return [];
     }
 
-    const {refetch,data: allCarts = []} = useQuery({
-        queryKey: ["carts",user?.email],
-        queryFn: fetchCart
-    })
-
-    return [refetch,allCarts]
 };
 
 export default useCart;

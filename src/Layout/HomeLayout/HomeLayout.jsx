@@ -17,12 +17,14 @@ const HomeLayout = () => {
                 <Offered />
                 <ViewAll />
             </div>
-            <div className="drawer-side top-20 ms-2">
+            <div className="drawer-side top-20 mb-4 ms-2">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-white rounded text-base-content min-h-full w-80 p-4">
+                <ul className="menu bg-white rounded text-base-content min-h-full w-80 px-4 py-10">
                     {/* sidebar contain */}
-                    <li><a>Sidebar Item 1</a></li>
-                    <li><a>Sidebar Item 2</a></li>
+                    <li className='text-center text-xl text-gray-600 '>Filters</li>
+                    <li><h1>Drug by generic:</h1></li>
+                    <li><h1>Drug by class:</h1></li>
+                    <li><h1>Drug by indication:</h1></li>
                 </ul>
             </div>
         </div>
