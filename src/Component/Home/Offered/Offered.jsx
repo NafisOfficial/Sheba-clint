@@ -10,8 +10,17 @@ const Offered = () => {
 
     useEffect(()=>{
         fetch('http://localhost:3000/drugs/category?company_name=Renata%20Limited')
-        .then(res=>res.json())
+        .then(res=>{
+            if(!res.ok){
+                throw new Error({errorMessage: "There was a server side error",status: 500})
+            }else{
+                return res.json()
+            }
+        })
         .then(data=>setOfferedProduct(data))
+        .catch((error)=>{
+            console.log(error);
+        })
     },[])
     return (
         <div className='grid grid-cols-2 gap-2 mx-3 md:grid-cols-4'>

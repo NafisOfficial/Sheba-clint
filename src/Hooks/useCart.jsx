@@ -19,6 +19,7 @@ const useCart = () => {
             return result.json();
         }
 
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const { refetch, data: allCarts = [] } = useQuery({
             queryKey: ["carts", user?.email],
             queryFn: fetchCart,

@@ -6,8 +6,16 @@ const MostOrdered = () => {
 
     useEffect(()=>{
         fetch("http://localhost:3000/drugs/most-ordered")
-        .then((res)=>res.json())
+        .then((res)=>{
+            if(!res.ok){
+                throw new Error({errorMessage: "There was a server side error",status: 500});
+            }
+            return res.json()
+        })
         .then((result)=>setDruglist(result))
+        .catch((error)=>{
+            console.log(error);
+        })
     },[])
 
     return (
