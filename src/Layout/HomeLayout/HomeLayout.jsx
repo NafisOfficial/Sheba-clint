@@ -22,7 +22,16 @@ const HomeLayout = () => {
                 <ul className="menu bg-white rounded text-base-content min-h-full w-80 px-4 py-10">
                     {/* sidebar contain */}
                     <li className='text-center text-xl text-gray-600 '>Filters</li>
-                    <li><h1>Drug by generic:</h1></li>
+                    <li><h1>Drug by generic:</h1>
+                        <div>
+                            <div className="form-control">
+                                <label className="cursor-pointer label">
+                                    <input type="checkbox" className="checkbox checkbox-primary checkbox-xs" />
+                                    <span className="label-text">Remember me</span>
+                                </label>
+                            </div>
+                        </div>
+                    </li>
                     <li><h1>Drug by class:</h1></li>
                     <li><h1>Drug by indication:</h1></li>
                 </ul>
