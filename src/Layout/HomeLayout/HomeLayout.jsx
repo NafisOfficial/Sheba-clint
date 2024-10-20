@@ -26,7 +26,7 @@ const HomeLayout = () => {
                         <div>
                             <div className="form-control">
                                 <label className="cursor-pointer label">
-                                    <input type="checkbox" className="checkbox checkbox-primary checkbox-xs" />
+                                    <input type="checkbox" className="checkbox checkbox-info checkbox-xs" />
                                     <span className="label-text">Remember me</span>
                                 </label>
                             </div>
