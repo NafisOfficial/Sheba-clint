@@ -7,9 +7,9 @@ import { AuthContex } from "../Provider/AuthProvider/AuthProvider";
 const useCart = () => {
     const { user } = useContext(AuthContex);
 
-    if (!user?.email) {
-        return [];
-    }
+    // if (!user?.email) {
+    //     return [];
+    // }
     try {
         const fetchCart = async () => {
             const result = await fetch(`http://localhost:3000/carts?email=${user?.email}`)

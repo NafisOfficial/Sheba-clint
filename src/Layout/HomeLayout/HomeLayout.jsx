@@ -5,7 +5,7 @@ import NavOption from '../../Component/SideNavigation/NavOption/NavOption';
 import useGetOptions from '../../Hooks/useGetOptions';
 
 const HomeLayout = () => {
-    const [,options] = useGetOptions("generic");
+    const [, genericOptions] = useGetOptions("generic");
 
     return (
         <div className="drawer lg:drawer-open ">
@@ -26,17 +26,23 @@ const HomeLayout = () => {
                 <div className="menu bg-white rounded text-base-content min-h-full w-80 px-4 py-10">
                     {/* sidebar contain */}
                     <div className='text-center text-xl text-gray-600 '>Filters</div>
-                    <div><h1>Drug by generic:</h1>
-                        <div className='grid grid-cols-2'>
-                            {options?.map((dt,index)=><NavOption key={index} option={dt}/>)}
+                    <div><h1 className='mt-5 mb-3 text-lg'>Drug by generic:</h1>
+                        <div className='grid grid-cols-2 gap-3'>
+                            {genericOptions?.map((dt, index) => <NavOption key={index} option={dt} />)}
                         </div>
                     </div>
-                    <div><h1>Drug by class:</h1>
+                    <div>
+                        <h1 className='mt-5 mb-3 text-lg'>Drug by class:</h1>
                         <div>
 
                         </div>
                     </div>
-                    <div><h1>Drug by indication:</h1></div>
+                    <div>
+                        <h1 className='mt-5 mb-3 text-lg'>Drug by indication:</h1>
+                        <div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
