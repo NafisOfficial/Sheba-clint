@@ -1,11 +1,39 @@
+import { useEffect, useState } from 'react';
 import MostOrdered from '../../Component/Home/MostOrdered/MostOrdered';
-import Offered from '../../Component/Home/Offered/Offered';
-import ViewAll from '../../Component/Home/ViewAll/ViewAll';
 import NavOption from '../../Component/SideNavigation/NavOption/NavOption';
 import useGetOptions from '../../Hooks/useGetOptions';
+import useGetProduct from '../../Hooks/useGetProduct';
 
 const HomeLayout = () => {
-    const [, genericOptions] = useGetOptions("generic");
+    const [isLoadingGeneric, genericOptions] = useGetOptions("generic");
+    const [selectedOptions, setSelectedOptions] = useState({});
+    const [filteredData,setFilteredData] = useState([])
+    const [isLoading, drugs] = useGetProduct();
+
+
+
+
+    useEffect(()=>{
+        const filterdData = drugs?.filter(drug=>{
+            return Object?.keys(selectedOptions)?.every(key=>{
+                if(selectedOptions[key] && selectedOptions[key].length > 0){
+                    return selectedOptions[key]?.includes(drug[key])
+                }else{
+                    return true;
+                }
+            })
+        })
+
+        setFilteredData(filterdData)
+    },[drugs, selectedOptions])
+
+
+
+
+
+
+
+
 
     return (
         <div className="drawer lg:drawer-open ">
@@ -15,11 +43,7 @@ const HomeLayout = () => {
                     Open drawer
                 </label>
                 {/* main body content  */}
-                <div className="divider divider-start ms-4 text-lg md:text-2xl">Most ordered</div>
-                <MostOrdered />
-                <div className="divider divider-start ms-4 text-lg md:text-2xl">Free home delivery</div>
-                <Offered />
-                <ViewAll />
+                {<MostOrdered data={filteredData} isLoading={isLoading} />}
             </div>
             <div className="drawer-side top-20 mb-4 ms-2">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
@@ -27,9 +51,9 @@ const HomeLayout = () => {
                     {/* sidebar contain */}
                     <div className='text-center text-xl text-gray-600 '>Filters</div>
                     <div><h1 className='mt-5 mb-3 text-lg'>Drug by generic:</h1>
-                        <div className='grid grid-cols-2 gap-3'>
-                            {genericOptions?.map((dt, index) => <NavOption key={index} option={dt} />)}
-                        </div>
+                        {isLoadingGeneric ? <span className="loading loading-spinner loading-md"></span> : <div className='grid grid-cols-2 gap-3'>
+                            {genericOptions?.map((dt, index) => <NavOption key={index} setSelectedOptions={setSelectedOptions} option={dt} previousValue={selectedOptions} optionName="generic" />)}
+                        </div>}
                     </div>
                     <div>
                         <h1 className='mt-5 mb-3 text-lg'>Drug by class:</h1>

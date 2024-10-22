@@ -1,8 +1,6 @@
 import DrugCard from "../../Shared/DrugCard/DrugCard";
-import useGetProduct from "../../../Hooks/useGetProduct";
 
-const MostOrdered = () => {
-    const [isLoading,drugs] = useGetProduct()
+const MostOrdered = ({data,isLoading}) => {
 
 
     if(isLoading){
@@ -11,7 +9,7 @@ const MostOrdered = () => {
 
     return (
         <div className="grid grid-cols-2 gap-2 mx-3 md:grid-cols-4 ">
-            {drugs?.map(drug=><DrugCard key={drug._id} data={drug}/>)}
+            {data?.map(drug=><DrugCard key={drug._id} data={drug}/>)}
         </div>
     );
 };
