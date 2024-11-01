@@ -22,7 +22,7 @@ const HomeLayout = () => {
     useEffect(() => {
         const filterdData = drugs?.filter(drug => {
             return Object?.keys(selectedOptions)?.every(key => {
-                if (selectedOptions[key] && selectedOptions[key].length > 0) {
+                if (drug[key] && selectedOptions[key].length > 0) {
                     return selectedOptions[key]?.includes(drug[key])
                 } else {
                     return true;
