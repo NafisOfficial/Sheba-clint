@@ -14,8 +14,9 @@ const useGetOptions = (optionName) => {
 
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const {isLoading,data:options=[]} = useQuery({
-            queryKey: ["options"],
-            queryFn: getOptions
+            queryKey: ["options",optionName],
+            queryFn: getOptions,
+            enabled: !!optionName
         })
 
         return [isLoading,options];
