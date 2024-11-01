@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 const useGetProduct = () => {
     try {
         const getProduct=async()=>{
-            const res = await fetch("http://localhost:3000/drugs/all-drugs")
+            const res = await fetch("https://sheba-server.vercel.app/drugs/all-drugs")
             if(!res.ok){
                 throw new Error("Failed to fetch product data");
             }

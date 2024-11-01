@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 const useGetOptions = (optionName) => {
     try {
         const getOptions= async()=>{
-            const res = await fetch(`http://localhost:3000/drugs/options/${optionName}`)
+            const res = await fetch(`https://sheba-server.vercel.app/drugs/options/${optionName}`)
             if(!res.ok){
                 throw new Error("Failed to fetch options");
             }

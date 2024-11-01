@@ -1,10 +1,13 @@
 
 import {
-  createBrowserRouter,
+    createBrowserRouter,
 } from "react-router-dom";
+import { toast } from "react-toastify";
+import ProivateRoute from "../../Component/Shared/PrivateRoute/ProivateRoute";
 import Dashbord from "../../Layout/Dashbord/Dashbord";
 import Main from "../../Layout/Main/Main";
 import AllMedicine from "../../Pages/AllMedicine/AllMedicine";
+import Carts from "../../Pages/Carts/Carts";
 import GenericPage from "../../Pages/GenericPage/GenericPage";
 import Home from "../../Pages/Home/Home";
 import InfoPage from "../../Pages/InfoPage/InfoPage";
@@ -13,9 +16,6 @@ import News from "../../Pages/News/News";
 import Profile from "../../Pages/Profile/Profile";
 import SignUp from "../../Pages/SignUp/SignUp";
 import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
-import Carts from "../../Pages/Carts/Carts";
-import { toast } from "react-toastify";
-import ProivateRoute from "../../Component/Shared/PrivateRoute/ProivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
     {
       path: 'all-medicine',
       element:<AllMedicine/>,
-      loader:()=>fetch("http://localhost:3000/drugs/all-drugs")
+      loader:()=>fetch("https://sheba-server.vercel.app/drugs/all-drugs")
     },
     {
       path:'update-profile',
@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
       loader: ({ params }) => {
         let name = params.name
         name = name.replace(/:/g,'');
-        return fetch(`http://localhost:3000/drugs/category?generic=${name}`)
+        return fetch(`https://sheba-server.vercel.app/drugs/category?generic=${name}`)
           .then(res => res.json())
           .then(data => {
             return data;

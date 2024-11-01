@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { IoCartOutline } from "react-icons/io5";
-import { AuthContex } from "../../../Provider/AuthProvider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useCart from "../../../Hooks/useCart";
+import { AuthContex } from "../../../Provider/AuthProvider/AuthProvider";
 
 const DrugCard = ({ data, offer }) => {
 
@@ -24,7 +24,7 @@ const DrugCard = ({ data, offer }) => {
 
         if (user) {
             const cartObject = { drugId: _id, drugImg: data.drugImg, form, brand, dose, generic, price_per_unit, userEmail: user.email }
-            fetch('http://localhost:3000/carts', {
+            fetch('https://sheba-server.vercel.app/carts', {
                 method: "POST",
                 headers: {
                     "Content-type": "Application/json"

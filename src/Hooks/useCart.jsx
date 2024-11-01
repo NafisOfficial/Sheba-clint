@@ -12,7 +12,7 @@ const useCart = () => {
     // }
     try {
         const fetchCart = async () => {
-            const result = await fetch(`http://localhost:3000/carts?email=${user?.email}`)
+            const result = await fetch(`https://sheba-server.vercel.app/carts?email=${user?.email}`)
             if(!result.ok){
                 throw new Error("Failed to fetch cart data")
             }

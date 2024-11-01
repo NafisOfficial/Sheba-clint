@@ -1,7 +1,7 @@
-import { MdDelete } from "react-icons/md";
-import { FaMinus, FaPlus } from "react-icons/fa";
-import { toast } from "react-toastify";
 import { useState } from "react";
+import { FaMinus, FaPlus } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const CartDetails = ({ data, object }) => {
 
@@ -39,7 +39,7 @@ const CartDetails = ({ data, object }) => {
 
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:3000/carts/singleCart?email=${data?.userEmail}&&id=${id}`, {
+        fetch(`https://sheba-server.vercel.app/carts/singleCart?email=${data?.userEmail}&&id=${id}`, {
             method: "DELETE"
         })
             .then(() => {
