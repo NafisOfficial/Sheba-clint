@@ -66,7 +66,6 @@ const SignUp = () => {
                 userObject.email = user?.email;
                 userObject.photoURl = user?.photoURL || "https://i.ibb.co/GtWpN1b/image.png"
 
-
                 fetch('https://sheba-server.vercel.app/users', {
                     method: "POST",
                     headers: {
@@ -75,13 +74,15 @@ const SignUp = () => {
                     body: JSON.stringify(userObject)
                 })
 
+
                 isLoading(false);
                 navigate(from, { replace: true })
                 toast.success("Signup successful");
             })
-            .catch(() => {
+            .catch((error) => {
                 toast.error("Failed to signup");
                 setErrorMessage("There was a problem in server");
+                console.log(error);
             })
     }
 

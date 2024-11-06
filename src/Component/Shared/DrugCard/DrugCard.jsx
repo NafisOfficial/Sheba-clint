@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useCart from "../../../Hooks/useCart";
 import { AuthContex } from "../../../Provider/AuthProvider/AuthProvider";
+import { FaCheck } from "react-icons/fa";
 
 const DrugCard = ({ data, offer }) => {
 
@@ -11,6 +12,7 @@ const DrugCard = ({ data, offer }) => {
     const { user } = useContext(AuthContex)
     const navigate = useNavigate();
     const location = useLocation();
+    const [cartPostStatus, setCartPostStatus] = useState("notPosted")
     const [refetch] = useCart();
 
 
@@ -21,9 +23,9 @@ const DrugCard = ({ data, offer }) => {
     }
 
     const addToCart = () => {
-
         if (user) {
             const cartObject = { drugId: _id, drugImg: data.drugImg, form, brand, dose, generic, price_per_unit, userEmail: user.email }
+            setCartPostStatus("loading")
             fetch('https://sheba-server.vercel.app/carts', {
                 method: "POST",
                 headers: {
@@ -32,14 +34,31 @@ const DrugCard = ({ data, offer }) => {
                 body: JSON.stringify(cartObject)
             }).then(() => {
                 refetch();
+                setCartPostStatus("posted")
                 toast.success("Added to the cart");
             }).catch(() => {
+                setCartPostStatus("notPosted")
                 toast.error("Failed to add cart");
             })
         } else {
             navigate('/login', { state: { from: location } });
         }
     }
+
+
+
+    const handleCartCurrentStatus=()=>{
+        if(cartPostStatus === "notPosted"){
+            return <button onClick={addToCart} className="btn btn-sm ms-auto btn-info rounded-full"><IoCartOutline className="text-xl" /></button>
+        }
+        if(cartPostStatus === "loading"){
+            return <div className="btn btn-sm ms-auto btn-info rounded-full"><span className="loading loading-spinner loading-xs"></span></div>
+        }
+        if(cartPostStatus === "posted"){
+            return <button onClick={addToCart} className="btn btn-sm ms-auto btn-info rounded-full"><FaCheck className="text-xl"/></button>
+        }
+    }
+
 
     return (
         <div>
@@ -59,7 +78,7 @@ const DrugCard = ({ data, offer }) => {
                     </div>
                     <div className="card-actions mb-5">
                         {offer?.isOffered && <p className="text-blue-700 text-sm">{offer?.details}</p>}
-                        <button onClick={addToCart} className="btn btn-sm ms-auto btn-info rounded-full"><IoCartOutline className="text-xl" /></button>
+                        {handleCartCurrentStatus()}
                     </div>
                 </div>
             </div>
