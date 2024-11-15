@@ -31,7 +31,7 @@ const Navbar = () => {
         </div>
         <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box md:w-52 w-32">
             <li>
-                {Options["userUtility"].map((utility,index)=><Link key={index} to={utility.path}>{utility.tittle}</Link>)}
+                {Options["userUtility"]?.map((utility,index)=><Link key={index} to={utility?.path}>{utility?.tittle}</Link>)}
             </li>
             <li><button onClick={signOut}>Logout</button></li>
         </ul>
@@ -49,7 +49,7 @@ const Navbar = () => {
                         <input type="text" placeholder="Search" className="input md:input-md input-sm input-bordered md:w-36 w-16 md:w-auto"/>
                     </div>
                     <div>
-                        {Options["navigation"].map((option, index) => <Link key={index} to={option.path} className='md:text-base text-sm ms-3'>{option.tittle}</Link>)}
+                        {Options["navigation"]?.map((option, index) => <Link key={index} to={option?.path} className='md:text-base text-sm ms-3'>{option?.tittle}</Link>)}
                     </div>
                     <Link to="/carts" tabIndex={0} role="button" className="btn btn-ghost btn-circle ">
                         <div className="indicator">
@@ -72,10 +72,6 @@ export default Navbar;
 //options for navigation and user utility
 const Options = {
     navigation: [
-        {
-            tittle: "All medicine",
-            path: "/all-medicine"
-        },
         {
             tittle: "News",
             path: "/news"
