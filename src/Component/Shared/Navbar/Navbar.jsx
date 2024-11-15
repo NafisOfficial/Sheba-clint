@@ -8,7 +8,7 @@ import useCart from '../../../Hooks/useCart';
 const Navbar = () => {
 
     const { user, handleLogOut } = useContext(AuthContex)
-    const [,allCarts] = useCart();
+    const [, allCarts] = useCart();
 
 
 
@@ -31,11 +31,8 @@ const Navbar = () => {
         </div>
         <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box md:w-52 w-32">
             <li>
-                <Link to={`/profile`} className="justify-between">
-                    Profile
-                </Link>
+                {Options["userUtility"].map((utility,index)=><Link key={index} to={utility.path}>{utility.tittle}</Link>)}
             </li>
-            <li><Link to="/history">History</Link></li>
             <li><button onClick={signOut}>Logout</button></li>
         </ul>
     </div>
@@ -43,19 +40,16 @@ const Navbar = () => {
 
     return (
         <div className='sticky top-0 z-30'>
-            <div className="navbar bg-[#D6AD60] ]">
+            <div className="navbar bg-[#D6AD60] pe-3 md:pe-5">
                 <div className="flex-1">
                     <Link to="/" className="btn btn-ghost md:text-xl text-sm"><img className='md:h-5 md:w-5 h-4 w-4' src={logo} alt="logo" />Sheba</Link>
                 </div>
-                <div className="flex-none md:gap-7 gap-2">
-                    <div className="form-control">
-                        <input type="text" placeholder="Search" className="input md:input-md input-sm input-bordered md:w-36 w-16 md:w-auto" />
+                <div className="flex-none">
+                    <div className="form-control me-2">
+                        <input type="text" placeholder="Search" className="input md:input-md input-sm input-bordered md:w-36 w-16 md:w-auto"/>
                     </div>
                     <div>
-                        <Link to="/all-medicine" className='md:text-base text-sm'>All medicine</Link>
-                    </div>
-                    <div>
-                        <Link to="/news" className='md:text-base text-sm'>News</Link>
+                        {Options["navigation"].map((option, index) => <Link key={index} to={option.path} className='md:text-base text-sm ms-3'>{option.tittle}</Link>)}
                     </div>
                     <Link to="/carts" tabIndex={0} role="button" className="btn btn-ghost btn-circle ">
                         <div className="indicator">
@@ -68,6 +62,35 @@ const Navbar = () => {
             </div>
         </div>
     );
+
+
 };
 
 export default Navbar;
+
+
+//options for navigation and user utility
+const Options = {
+    navigation: [
+        {
+            tittle: "All medicine",
+            path: "/all-medicine"
+        },
+        {
+            tittle: "News",
+            path: "/news"
+        }
+    ],
+    userUtility: [
+        {
+            tittle: "Profile",
+            path: "/profile"
+        },
+        {
+            tittle: "History",
+            path: "/history"
+        }
+    ]
+}
+
+
