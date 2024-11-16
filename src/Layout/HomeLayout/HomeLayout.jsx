@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import MostOrdered from '../../Component/Home/MostOrdered/MostOrdered';
 import NavOption from '../../Component/SideNavigation/NavOption/NavOption';
 import useGetOptions from '../../Hooks/useGetOptions';
 import useGetProduct from '../../Hooks/useGetProduct';
+import { StatusContext } from '../../Provider/StatusProvider/StatusProvider';
 
 const HomeLayout = () => {
     // getting option from custom hook by api call
@@ -15,6 +16,8 @@ const HomeLayout = () => {
     const [filteredData, setFilteredData] = useState([])
     //getting all drugs from custom hook by api call
     const [isLoading, drugs] = useGetProduct();
+    //drawer status manage
+    const {isDrawerOpened} = useContext(StatusContext);
 
 
 
@@ -34,22 +37,15 @@ const HomeLayout = () => {
     }, [drugs, selectedOptions])
 
 
-
-
-
-
-
+    const noData = <div className='h-full'>No data avialable</div>
 
 
     return (
         <div className="drawer lg:drawer-open ">
-            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+            <input id="my-drawer-2" checked={isDrawerOpened} readOnly type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center justify-center">
-                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
-                    Open drawer
-                </label>
                 {/* main body content  */}
-                {<MostOrdered data={filteredData} isLoading={isLoading} />}
+                {filteredData.length>0?<MostOrdered data={filteredData} isLoading={isLoading} />:noData}
             </div>
             <div className="drawer-side top-20 mb-4 ms-2">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
