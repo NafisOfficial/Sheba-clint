@@ -47,7 +47,7 @@ const HomeLayout = () => {
                 {/* main body content  */}
                 {filteredData.length>0?<MostOrdered data={filteredData} isLoading={isLoading} />:noData}
             </div>
-            <div className="drawer-side top-20 mb-4 ms-2">
+            <div className="drawer-side top-20 mb-4 ms-2 z-50">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <div className="menu bg-white rounded text-base-content w-80 px-4 py-10">
                     {/* sidebar contain */}
