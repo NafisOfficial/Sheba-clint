@@ -41,17 +41,18 @@ const Navbar = () => {
         </ul>
     </div>
 
+    
 
     return (
         <div className='sticky top-0 z-30'>
             <div className="navbar bg-[#D6AD60] pe-3 md:pe-5">
                 <div className="navbar-start">
                     <Link to="/" className="btn btn-ghost md:text-xl md:flex text-sm hidden"><img className='md:h-5 md:w-5 h-4 w-4' src={logo} alt="logo" />Sheba</Link>
-                    <RxHamburgerMenu onClick={()=>setDrawerOpen(!isDrawerOpened)} className='block md:hidden text-2xl ms-2'/>
+                    <RxHamburgerMenu onClick={()=>setDrawerOpen(true)} className='block md:hidden text-2xl ms-2'/>
                 </div>
-                <div className='navbar-center hidden md:flex'>
-                    <input type="text" className='w-80 px-3 py-2 focus:outline-none rounded-l-lg' name="search" id="search" placeholder='Enter your keyword...'/>
-                    <button className='bg-info px-5 py-2 rounded-r-lg'><FaSearch className='text-2xl text-white'/></button>
+                <div className='navbar-center hidden md:flex cursor-pointer'>
+                    <div className='w-80 bg-white text-gray-400 px-3 py-2 rounded-l-lg' >Enter your keyword...</div>
+                    <div className='bg-info px-5 py-2 rounded-r-lg'><FaSearch className='text-2xl text-white'/></div>
                 </div>
                 <div className="navbar-end">
                     <div>
