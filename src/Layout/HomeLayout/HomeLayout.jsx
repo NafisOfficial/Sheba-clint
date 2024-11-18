@@ -36,17 +36,19 @@ const HomeLayout = () => {
         setFilteredData(filterdData)
     }, [drugs, selectedOptions])
 
-    //drawer close side effect
+    // drawer close side effect
     const drawerRef = useRef();
 
     useEffect(() => {
         const drawerClose = (event) => {
-            event.preventDefault();
-            if (!drawerRef.current.contains(event.target)) {
+            if (drawerRef.current && !drawerRef.current.contains(event.target)) {
                 setDrawerOpen(false);
             }
         }
         document.addEventListener("mousedown", drawerClose)
+        return ()=>{
+            document.removeEventListener("mousedown",drawerClose)
+        }
     }, [])
 
 

@@ -12,7 +12,7 @@ import { StatusContext } from '../../../Provider/StatusProvider/StatusProvider';
 const Navbar = () => {
     const { user, handleLogOut } = useContext(AuthContext)
     const [, allCarts] = useCart();
-    const {isDrawerOpened,setDrawerOpen} = useContext(StatusContext);
+    const {setDrawerOpen} = useContext(StatusContext);
 
 
 
