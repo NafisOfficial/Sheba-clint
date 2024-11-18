@@ -39,7 +39,7 @@ const CartDetails = ({ data, object }) => {
 
 
     const handleDelete = (id) => {
-        fetch(`https://sheba-server.vercel.app/carts/singleCart?email=${data?.userEmail}&&id=${id}`, {
+        fetch(`https://sheba-server.vercel.app/carts/delete/singleCart?email=${data?.userEmail}&&id=${id}`, {
             method: "DELETE"
         })
             .then(() => {

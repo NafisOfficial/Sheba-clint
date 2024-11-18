@@ -1,6 +1,7 @@
 import useCart from '../../Hooks/useCart';
 import CartDetails from '../../Component/Cart/CartDetails/CartDetails';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Carts = () => {
     
@@ -15,6 +16,17 @@ const Carts = () => {
 
 
     const object = {refetch,totalSum,setTotalSum}
+
+
+    const handleDeleteAll =async()=>{
+        fetch("https://sheba-server.vercel.app/carts/delete/all")
+        .then(()=>{
+            refetch()
+        })
+        .then(()=>{
+            toast.error("Failed to delete");
+        })
+    }
 
 
     const noData = <tr className='h-lvh'>
@@ -53,7 +65,7 @@ const Carts = () => {
                     </tbody>
                 </table>
                 <div className='flex justify-between mt-5'>
-                    <button className="btn btn-active btn-sm btn-info">Delete all</button>
+                    <button onClick={handleDeleteAll} className="btn btn-active btn-sm btn-info">Delete all</button>
                     <button className="btn btn-active btn-sm btn-info md:me-44 me-0">Goto Pay</button>
                 </div>
             </div> : noData}
