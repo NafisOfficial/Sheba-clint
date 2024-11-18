@@ -25,14 +25,14 @@ const Carts = () => {
                 method: "DELETE"
             })
         .then(()=>{
+            toast.success("Deleted all cats")
             refetch()
         })
-        .then((error)=>{
-            console.log(error);
-            toast.error("Failed to delete");
+        .catch(()=>{
+            toast.error("Failed to delete1");
         })
         }else{
-            toast.error("Failed to delete");
+            toast.error("Failed to delete2");
         }
     }
 
