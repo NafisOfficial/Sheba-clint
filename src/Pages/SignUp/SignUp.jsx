@@ -4,11 +4,11 @@ import { useContext, useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
+import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 
 const SignUp = () => {
     //hooks
-    const { auth, isLoading, handleSignUpByGoogle, handleSignUp } = useContext(AuthContex)
+    const { auth, isLoading, handleSignUpByGoogle, handleSignUp } = useContext(AuthContext)
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const location = useLocation();

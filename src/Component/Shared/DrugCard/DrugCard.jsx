@@ -1,15 +1,15 @@
 import { useContext, useState } from "react";
+import { FaCheck } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useCart from "../../../Hooks/useCart";
-import { AuthContex } from "../../../Provider/AuthProvider/AuthProvider";
-import { FaCheck } from "react-icons/fa";
+import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
 
 const DrugCard = ({ data, offer }) => {
 
     const { _id, form, brand, dose, generic, price_per_unit, company_name } = data;
-    const { user } = useContext(AuthContex)
+    const { user } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
     const [cartPostStatus, setCartPostStatus] = useState("notPosted")

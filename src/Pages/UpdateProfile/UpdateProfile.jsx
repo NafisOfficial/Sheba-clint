@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { Form, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
+import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 
 
 
 const UpdateProfile = () => {
 
-    const { user, dbUser } = useContext(AuthContex);
+    const { user, dbUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
      const handleUpdate =(event)=>{

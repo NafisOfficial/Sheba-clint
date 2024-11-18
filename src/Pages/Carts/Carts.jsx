@@ -1,10 +1,11 @@
-import useCart from '../../Hooks/useCart';
-import CartDetails from '../../Component/Cart/CartDetails/CartDetails';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
+import CartDetails from '../../Component/Cart/CartDetails/CartDetails';
+import useCart from '../../Hooks/useCart';
+import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 
 const Carts = () => {
-    
+    const { user } = useContext(AuthContext);
     const [refetch, datas] = useCart();
     const [totalSum,setTotalSum] = useState(()=>{
         const total = datas?.reduce((pre,sum)=>{
@@ -19,13 +20,17 @@ const Carts = () => {
 
 
     const handleDeleteAll =async()=>{
-        fetch("https://sheba-server.vercel.app/carts/delete/all")
+        if(user){
+            fetch(`https://sheba-server.vercel.app/carts/delete/all?userEmail=${user?.email}`)
         .then(()=>{
             refetch()
         })
         .then(()=>{
             toast.error("Failed to delete");
         })
+        }else{
+            toast.error("Failed to delete");
+        }
     }
 
 

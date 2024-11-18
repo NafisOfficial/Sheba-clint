@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AuthContex } from "../../Provider/AuthProvider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 
 
 const Profile = () => {
-    const { user,dbUser,setdbUser } = useContext(AuthContex)
+    const { user,dbUser,setdbUser } = useContext(AuthContext)
 
     const notSet = "not set yet !";
 

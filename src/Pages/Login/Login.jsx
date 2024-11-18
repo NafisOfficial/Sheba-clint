@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContex } from '../../Provider/AuthProvider/AuthProvider';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 
 const Login = () => {
 
     //hooks
-    const {handleLogin,isLoading} = useContext(AuthContex);
+    const {handleLogin,isLoading} = useContext(AuthContext);
     const [errorMessage,setErrorMessage] = useState("")
     const navigate = useNavigate();
     const location = useLocation();

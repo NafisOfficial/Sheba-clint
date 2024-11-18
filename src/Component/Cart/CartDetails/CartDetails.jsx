@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
 
 const CartDetails = ({ data, object }) => {
 
     const [amount, setAmount] = useState(1);
-    const { refetch,totalSum, setTotalSum } = object;
+    const { refetch, totalSum, setTotalSum } = object;
+    const { user } = useContext(AuthContext);
 
 
     const handlePlus = () => {
@@ -39,15 +41,19 @@ const CartDetails = ({ data, object }) => {
 
 
     const handleDelete = (id) => {
-        fetch(`https://sheba-server.vercel.app/carts/delete/singleCart?email=${data?.userEmail}&&id=${id}`, {
-            method: "DELETE"
-        })
-            .then(() => {
-                refetch();
+        if (user) {
+            fetch(`https://sheba-server.vercel.app/carts/delete/singleCart?email=${user?.email}&&id=${id}`, {
+                method: "DELETE"
             })
-            .catch(() => {
-                toast.error("There is a server side error");
-            })
+                .then(() => {
+                    refetch();
+                })
+                .catch(() => {
+                    toast.error("Failed to delete cart");
+                })
+        } else {
+            toast.error("Failed to delete cart");
+        }
     }
 
 

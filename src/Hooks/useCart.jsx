@@ -1,15 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
-import { AuthContex } from "../Provider/AuthProvider/AuthProvider";
+import { AuthContext } from "../Provider/AuthProvider/AuthProvider";
 
 
 
 const useCart = () => {
-    const { user } = useContext(AuthContex);
+    const { user } = useContext(AuthContext);
 
-    // if (!user?.email) {
-    //     return [];
-    // }
     try {
         const fetchCart = async () => {
             const result = await fetch(`https://sheba-server.vercel.app/carts?email=${user?.email}`)

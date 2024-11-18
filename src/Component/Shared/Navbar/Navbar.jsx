@@ -1,16 +1,16 @@
 import { useContext } from 'react';
-import logo from '../../../assets/images/logos/logos.png';
-import { Link } from 'react-router-dom';
-import { AuthContex } from '../../../Provider/AuthProvider/AuthProvider';
-import { toast } from 'react-toastify';
-import useCart from '../../../Hooks/useCart';
 import { FaSearch } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import logo from '../../../assets/images/logos/logos.png';
+import useCart from '../../../Hooks/useCart';
+import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
 import { StatusContext } from '../../../Provider/StatusProvider/StatusProvider';
 
 
 const Navbar = () => {
-    const { user, handleLogOut } = useContext(AuthContex)
+    const { user, handleLogOut } = useContext(AuthContext)
     const [, allCarts] = useCart();
     const {isDrawerOpened,setDrawerOpen} = useContext(StatusContext);
 

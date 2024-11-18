@@ -1,8 +1,8 @@
-import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
 import { app } from "../Firebase/Firebase.config";
 
-export const AuthContex = createContext(null)
+export const AuthContext = createContext(null)
 
 
 
@@ -56,9 +56,9 @@ const AuthProvider = ( {children} ) => {
     }
 
     return (
-        <AuthContex.Provider value={AuthInfo}>
+        <AuthContext.Provider value={AuthInfo}>
             {children}
-        </AuthContex.Provider>
+        </AuthContext.Provider>
     );
 };
 
