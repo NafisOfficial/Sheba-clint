@@ -21,11 +21,14 @@ const Carts = () => {
 
     const handleDeleteAll =async()=>{
         if(user){
-            fetch(`https://sheba-server.vercel.app/carts/delete/all?userEmail=${user?.email}`)
+            fetch(`https://sheba-server.vercel.app/carts/delete/all?email=${user?.email}`,{
+                method: "DELETE"
+            })
         .then(()=>{
             refetch()
         })
-        .then(()=>{
+        .then((error)=>{
+            console.log(error);
             toast.error("Failed to delete");
         })
         }else{
