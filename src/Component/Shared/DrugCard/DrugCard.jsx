@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import useCart from "../../../Hooks/useCart";
 import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
 
-const DrugCard = ({ data, offer }) => {
+const DrugCard = ({ data }) => {
 
     const { _id, form, brand, dose, generic, price_per_unit, company_name } = data;
     const { user } = useContext(AuthContext)
@@ -76,8 +76,8 @@ const DrugCard = ({ data, offer }) => {
                             <p className="text-sm md:text-base"><span className="font-bold">Manufaturer:</span> {company_name}</p>
                         </div>
                     </div>
-                    <div className="card-actions mb-5">
-                        {offer?.isOffered && <p className="text-blue-700 text-sm">{offer?.details}</p>}
+                    <div className="card-actions mt-2 mb-3 md:mb-5">
+                        <button className="btn btn-sm btn-info rounded-full text-white">Details</button>
                         {handleCartCurrentStatus()}
                     </div>
                 </div>
