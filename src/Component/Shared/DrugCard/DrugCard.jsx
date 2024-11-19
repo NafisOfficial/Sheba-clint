@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useCart from "../../../Hooks/useCart";
 import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
@@ -73,11 +73,11 @@ const DrugCard = ({ data }) => {
                             <p className="text-sm md:text-base"><span className="font-bold">Form:</span> {form}</p>
                             <p className="text-sm md:text-base"><span className="font-bold">Generic:</span> {generic}</p>
                             <p className="text-sm md:text-base"><span className="font-bold">Price per unit:</span> {price_per_unit} BDT</p>
-                            <p className="text-sm md:text-base"><span className="font-bold">Manufaturer:</span> {company_name}</p>
+                            <p className="text-sm md:text-base"><span className="font-bold">Company:</span> {company_name}</p>
                         </div>
                     </div>
                     <div className="card-actions mt-2 mb-3 md:mb-5">
-                        <button className="btn btn-sm btn-info rounded-full text-white">Details</button>
+                        <button className="btn btn-sm btn-info rounded-full text-white"><Link to="/details">Details</Link></button>
                         {handleCartCurrentStatus()}
                     </div>
                 </div>

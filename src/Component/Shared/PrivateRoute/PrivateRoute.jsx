@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
 
-const ProivateRoute = ( {children} ) => {
+const PrivateRoute = ( {children} ) => {
 
     const {user} = useContext(AuthContext);
     const location = useLocation();
@@ -14,4 +14,4 @@ const ProivateRoute = ( {children} ) => {
     return <Navigate to="/login" state={{from: location}} replace={true}/>
 };
 
-export default ProivateRoute;
+export default PrivateRoute;

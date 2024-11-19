@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import CartDetails from '../../Component/Cart/CartDetails/CartDetails';
 import useCart from '../../Hooks/useCart';
 import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Carts = () => {
     const { user } = useContext(AuthContext);
@@ -74,7 +75,7 @@ const Carts = () => {
                 </table>
                 <div className='flex justify-between mt-5'>
                     <button onClick={handleDeleteAll} className="btn btn-active btn-sm btn-info">Delete all</button>
-                    <button className="btn btn-active btn-sm btn-info md:me-44 me-0">Goto Pay</button>
+                    <Link to="/carts/payment"><button className="btn btn-active btn-sm btn-info md:me-44 me-0">Goto Pay</button></Link>
                 </div>
             </div> : noData}
         </div>
