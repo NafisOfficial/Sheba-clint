@@ -9,7 +9,6 @@ import Main from "../../Layout/Main/Main";
 import AllMedicine from "../../Pages/AllMedicine/AllMedicine";
 import Carts from "../../Pages/Carts/Carts";
 import DrugDetails from "../../Pages/DrugDetails/DrugDetails";
-import GenericPage from "../../Pages/GenericPage/GenericPage";
 import Home from "../../Pages/Home/Home";
 import InfoPage from "../../Pages/InfoPage/InfoPage";
 import Login from "../../Pages/Login/Login";
