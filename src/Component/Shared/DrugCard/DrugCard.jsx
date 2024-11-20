@@ -77,7 +77,7 @@ const DrugCard = ({ data }) => {
                         </div>
                     </div>
                     <div className="card-actions mt-2 mb-3 md:mb-5">
-                        <button className="btn btn-sm btn-info rounded-full text-white"><Link to="/details">Details</Link></button>
+                        <button className="btn btn-sm btn-info rounded-full text-white"><Link to={`/details/${_id}`}>Details</Link></button>
                         {handleCartCurrentStatus()}
                     </div>
                 </div>

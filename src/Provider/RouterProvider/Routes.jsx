@@ -63,21 +63,16 @@ export const router = createBrowserRouter([
       element:<News/>
     },
     {
-      path:"details",
-      element:<DrugDetails/>
-    },
-    {
-      path: "generic/:name",
-      element: <GenericPage />,
-      loader: ({ params }) => {
-        let name = params.name
-        name = name.replace(/:/g,'');
-        return fetch(`https://sheba-server.vercel.app/drugs/category?generic=${name}`)
-          .then(res => res.json())
-          .then(data => {
-            return data;
-          })
-          .catch(() => toast.error("There was a server side error"))
+      path:"details/:_id",
+      element:<DrugDetails/>,
+      loader:({params})=>{
+        const drugId = params._id;
+        return fetch(`http://localhost:3000/drugs/single-drug/${drugId}`)
+                .then(res=>res.json())
+                .then(drug=>{
+                  return drug
+                })
+                .catch(()=>toast.error("Failed to get drug"))
       }
     },
     {

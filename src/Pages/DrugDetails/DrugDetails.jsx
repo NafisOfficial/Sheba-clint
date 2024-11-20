@@ -1,8 +1,12 @@
+import { useLoaderData } from "react-router-dom";
 
 const DrugDetails = () => {
+    const drug = useLoaderData();
+    console.log(drug);
     return (
         <div>
-            Drug details is here
+            <p>Name: </p>
+            <p>Company: </p>
         </div>
     );
 };
