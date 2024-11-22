@@ -1,14 +1,18 @@
 import { GoPlus } from "react-icons/go";
 import { FiMinus } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
 import { toast } from "react-toastify";
 
 const CartDetails = ({data,refetch}) => {
 
     const {_id,image,brand,form,dose,price_per_unit} = data;
+    //getting user data
     const { user } = useContext(AuthContext);
+    //getting cart data
+    const [amount, setAmount] = useState(1);
+    const [productType,setProductType] = useState("strip")
 
 
 
@@ -27,6 +31,29 @@ const CartDetails = ({data,refetch}) => {
         } else {
             toast.error("Failed to delete cart");
         }
+    }
+
+    const handlePlus = () => {
+
+        setAmount((prevAmount) => {
+            let newAmount = prevAmount + 1;
+            return newAmount;
+        },_id)
+
+    }
+
+    const handleMinus = () => {
+        if (amount > 1) {
+            setAmount((prevAmount) => {
+                let newAmount;
+                newAmount = prevAmount - 1;
+                return newAmount;
+            },_id)
+        }
+    }
+
+    const handleSelect=(event)=>{
+        setProductType(event.target.value);
     }
 
     return (
@@ -48,16 +75,16 @@ const CartDetails = ({data,refetch}) => {
                     <div className='flex justify-between items-center'>
                         <div className='flex gap-5'>
                             <div>
-                                <select name="" id="">
+                                <select onChange={handleSelect} name="parseType" id="">
                                     <option value="strip">10&apos;s strip</option>
                                     <option value="box">100&apos;s box</option>
                                     <option value="unit">Unit</option>
                                 </select>
                             </div>
                             <div className="flex justify-center items-center gap-3 md:gap-5 border border-gray-400 px-2 rounded">
-                                <FiMinus className="cursor-pointer" />
-                                <p>1</p>
-                                <GoPlus className="cursor-pointer" />
+                                <FiMinus onClick={() => handleMinus(_id)} className="cursor-pointer" />
+                                <p>{amount}</p>
+                                <GoPlus onClick={() => handlePlus(_id)} className="cursor-pointer" />
                             </div>
                         </div>
                         <button onClick={()=>handleDelete(_id)} className="flex items-center gap-1 btn btn-sm btn-info"><MdDelete /> Delete</button>

@@ -6,6 +6,8 @@ export const StatusContext = createContext(null);
 const StatusProvider = ({ children }) => {
     // handle navigation drawer status
     const [isDrawerOpened, setDrawerOpen] = useState(false)
+    //for cart functionality
+    
     
     //status container
     const statusInfo = {

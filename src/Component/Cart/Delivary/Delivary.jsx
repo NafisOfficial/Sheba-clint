@@ -3,7 +3,10 @@ const Delivary = () => {
     return (
         <div className="flex flex-col bg-white p-3 rounded gap-2 my-5 py-5">
             <p className="text-xl font-bold">Delivery</p>
-            <p>Date:</p>
+            <div className="flex items-center justify-between">
+                <p>Date:</p>
+                <p>{new Date().toDateString()}</p>
+            </div>
             <div className="flex bg-white gap-1">
                 <input type="text" className="rounded input input-bordered bg-transparent" name="" id="" placeholder="Promocode" />
                 <button className="btn bg-white">Apply</button>
