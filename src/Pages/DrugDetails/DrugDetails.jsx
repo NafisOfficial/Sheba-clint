@@ -13,12 +13,12 @@ const DrugDetails = () => {
     const [refetch] = useCart();
     const navigate = useNavigate();
 
-    const { _id, form, brand, dose, generic, price_per_unit, company_name,indications,interaction,mode_of_action,precautions_and_warnings,pregnancy_and_lactation,side_effects} = drug;
+    const { _id, form, image, brand, dose, generic, price_per_unit, indications, interaction, mode_of_action, precautions_and_warnings, pregnancy_and_lactation, side_effects } = drug;
 
 
     const addToCart = () => {
         if (user) {
-            const cartObject = { drugId: _id, form, brand, dose, generic, price_per_unit, company_name, userEmail: user.email }
+            const cartObject = { drugId: _id, image, form, brand, dose, generic, quantity: 1, productType: "strip", subTotal: price_per_unit*10, price_per_unit, userEmail: user.email }
             setCartPostStatus("loading")
             fetch('https://sheba-server.vercel.app/carts', {
                 method: "POST",
@@ -56,7 +56,7 @@ const DrugDetails = () => {
             <div className="border-2 w-80 mx-auto md:w-full border-gray-300 py-2 md:p-5 rounded  mt-10">
                 <div className="flex flex-col md:flex-row gap-3 md:gap-5 items-center">
                     <div>
-                        <img className='w-60 h-full rounded' src="https://plus.unsplash.com/premium_photo-1668487826871-2f2cac23ad56?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNpbmV8ZW58MHx8MHx8fDA%3D" alt="medicine" />
+                        <img className='w-60 h-full rounded' src={image} alt="medicine" />
                     </div>
                     <div >
                         <div className="flex flex-col gap-2">

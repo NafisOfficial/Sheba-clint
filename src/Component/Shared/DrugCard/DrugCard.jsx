@@ -18,7 +18,7 @@ const DrugCard = ({ data }) => {
 
     const addToCart = () => {
         if (user) {
-            const cartObject = { drugId: _id, image, form, brand, dose, generic, price_per_unit, userEmail: user.email }
+            const cartObject = { drugId: _id, image, form, brand, dose, generic,quantity: 1,productType: "strip",subTotal: price_per_unit*10, price_per_unit, userEmail: user.email }
             setCartPostStatus("loading")
             fetch('https://sheba-server.vercel.app/carts', {
                 method: "POST",

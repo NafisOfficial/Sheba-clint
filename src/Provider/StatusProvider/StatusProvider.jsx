@@ -8,7 +8,6 @@ const StatusProvider = ({ children }) => {
     const [isDrawerOpened, setDrawerOpen] = useState(false)
     //for cart functionality
     
-    
     //status container
     const statusInfo = {
         isDrawerOpened,
