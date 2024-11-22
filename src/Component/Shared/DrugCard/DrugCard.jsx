@@ -8,7 +8,7 @@ import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
 
 const DrugCard = ({ data }) => {
 
-    const { _id, form, brand, dose, generic, price_per_unit, company_name } = data;
+    const { _id,image, form, brand, dose, generic, price_per_unit, company_name } = data;
     const { user } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
@@ -16,15 +16,9 @@ const DrugCard = ({ data }) => {
     const [refetch] = useCart();
 
 
-    if (data?.form === "tablet") {
-        data.drugImg = "https://i.ibb.co/JQ8tMXX/tablets2.png"
-    } else if (data?.form === "capsule") {
-        data.drugImg = "https://i.ibb.co/rmR7nyV/capsules3.png"
-    }
-
     const addToCart = () => {
         if (user) {
-            const cartObject = { drugId: _id, drugImg: data.drugImg, form, brand, dose, generic, price_per_unit, userEmail: user.email }
+            const cartObject = { drugId: _id, image, form, brand, dose, generic, price_per_unit, userEmail: user.email }
             setCartPostStatus("loading")
             fetch('https://sheba-server.vercel.app/carts', {
                 method: "POST",
@@ -64,7 +58,7 @@ const DrugCard = ({ data }) => {
         <div>
             <div className="card w-auto bg-white shadow-xl">
                 <figure>
-                    <img src={data.drugImg} alt={form} className="rounded-xl md:h-32 md:w-32 h-20 w-20" />
+                    <img src={image} alt={form} className="rounded-xl md:h-32 md:w-full h-20" />
                 </figure>
                 <div className="md:px-5 px-3 items-left ">
                     <div className="h-22 md:h-44">

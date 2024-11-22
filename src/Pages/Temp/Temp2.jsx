@@ -8,7 +8,6 @@ const CartDetails = ({ data, object }) => {
 
     const [amount, setAmount] = useState(1);
     const { refetch, totalSum, setTotalSum } = object;
-    const { user } = useContext(AuthContext);
 
 
     const handlePlus = () => {
