@@ -27,7 +27,7 @@ const CheckOut = () => {
         orderDetails.currency = "BDT"
 
         if(isCheckedTerms && user){
-           fetch(`http://localhost:3000/carts/create-payment/${user?.email}`,{
+           fetch(`https://sheba-server.vercel.app/carts/create-payment/${user?.email}`,{
                 method: "POST",
                 headers:{
                     'Content-Type': 'application/x-www-form-urlencoded'
