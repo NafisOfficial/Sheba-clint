@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CartDetails from "../../Component/Cart/CartDetails/CartDetails";
 import useCart from "../../Hooks/useCart";
 
@@ -11,7 +11,7 @@ const Carts = () => {
     const [cart, setCart] = useState(datas)
 
 
-    const upDateData = (index, newQuantity, newProductType, newSubTotal) => {
+    const upDateData = useCallback((index, newQuantity, newProductType, newSubTotal) => {
         setCart((prevCart) => {
             const updatedCart = [...prevCart];
             updatedCart[index].quantity = newQuantity;
@@ -19,13 +19,14 @@ const Carts = () => {
             updatedCart[index].subTotal = newSubTotal;
             return updatedCart;
         });
+    },[])
 
-        const sum = cart.reduce((a, c) => {
-            return a.subTotal + c.subTotal;
-        });
+    useEffect(()=>{
+        const sum = cart?.reduce((a, c) => {
+            return a + c.subTotal;
+        },0);
         setValueTotal(sum);
-    };
-
+    },[cart])
 
     const object = { refetch, upDateData }
 

@@ -66,7 +66,7 @@ export const router = createBrowserRouter([
       element:<DrugDetails/>,
       loader:({params})=>{
         const drugId = params._id;
-        return fetch(`http://localhost:3000/drugs/single-drug/${drugId}`)
+        return fetch(`https://sheba-server.vercel.app/drugs/single-drug/${drugId}`)
                 .then(res=>res.json())
                 .then(drug=>{
                   return drug

@@ -36,6 +36,8 @@ const HomeLayout = () => {
         setFilteredData(filterdData)
     }, [drugs, selectedOptions])
 
+    
+
     // drawer close side effect
     const drawerRef = useRef();
 

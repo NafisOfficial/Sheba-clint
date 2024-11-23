@@ -71,7 +71,7 @@ const CartDetails = ({data,object,index}) => {
             setTotalPrice(total)
         }
         upDateData(index,amount,productType,totalPrice)
-    },[amount,productType,price_per_unit,index,totalPrice,upDateData])
+    },[amount,productType,totalPrice,index,price_per_unit,upDateData])
 
 
 
