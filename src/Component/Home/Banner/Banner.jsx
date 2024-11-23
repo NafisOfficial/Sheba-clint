@@ -1,9 +1,9 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import img1 from '../../../assets/images/banners/big-sell.jpg'
-import img2 from '../../../assets/images/banners/cash_back.jpg'
-import img3 from '../../../assets/images/banners/flash-cell.jpg'
-import img4 from '../../../assets/images/banners/Supper-sell.jpg'
+import img1 from '../../../assets/images/banners/banner5.jpg'
+import img2 from '../../../assets/images/banners/banner2.jpg'
+import img3 from '../../../assets/images/banners/banner3.jpg'
+import img4 from '../../../assets/images/banners/banner4.jpg'
 const Banner = () => {
 
 
