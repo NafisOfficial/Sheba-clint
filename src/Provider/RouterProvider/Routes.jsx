@@ -17,6 +17,8 @@ import Payment from "../../Pages/Payment/Payment";
 import Profile from "../../Pages/Profile/Profile";
 import SignUp from "../../Pages/SignUp/SignUp";
 import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
+import CheckOut from "../../Pages/CheckOut/CheckOut";
+import SuccessTr from "../../Pages/SuccessTr/SuccessTr";
 
 
 export const router = createBrowserRouter([
@@ -56,6 +58,14 @@ export const router = createBrowserRouter([
     {
       path:'/carts/payment',
       element:<PrivateRoute><Payment/></PrivateRoute>
+    },
+    {
+      path:'/carts/checkout',
+      element:<PrivateRoute><CheckOut/></PrivateRoute>
+    },
+    {
+      path:"/payment-success",
+      element:<PrivateRoute><SuccessTr/></PrivateRoute>
     },
     {
       path:'news',

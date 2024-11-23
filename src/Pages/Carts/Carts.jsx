@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import CartDetails from "../../Component/Cart/CartDetails/CartDetails";
 import useCart from "../../Hooks/useCart";
+import {  useNavigate } from "react-router-dom";
+import { StatusContext } from "../../Provider/StatusProvider/StatusProvider";
 
 
 
@@ -9,6 +11,8 @@ const Carts = () => {
     const [refetch, datas] = useCart();
     const [valueTotal, setValueTotal] = useState(0)
     const [cart, setCart] = useState(datas)
+    const {orderDetails} = useContext(StatusContext)
+    const navigate = useNavigate()
 
 
     const upDateData = useCallback((index, newQuantity, newProductType, newSubTotal) => {
@@ -26,9 +30,17 @@ const Carts = () => {
             return a + c.subTotal;
         },0);
         setValueTotal(sum);
+
+        orderDetails.totalPrice = valueTotal;
     },[cart])
 
     const object = { refetch, upDateData }
+
+    const handleCheckout=()=>{
+        orderDetails.orders = datas;
+        orderDetails.shippingFee = 150;
+        navigate("/carts/checkout")
+    }
 
     return (
         <div className="flex flex-col md:flex-row md:justify-between md:gap-8 mx-2 md:mx-5 my-3">
@@ -61,7 +73,7 @@ const Carts = () => {
                     <p>Total</p>
                     <p>{(valueTotal + 150).toFixed(2)} BDT</p>
                 </div>
-                <button className="btn btn-info">Proceed to checkout</button>
+                <button onClick={handleCheckout} className="btn btn-info">Proceed to checkout</button>
             </div>
         </div>
     );

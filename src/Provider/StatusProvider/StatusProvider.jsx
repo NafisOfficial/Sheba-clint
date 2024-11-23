@@ -7,11 +7,12 @@ const StatusProvider = ({ children }) => {
     // handle navigation drawer status
     const [isDrawerOpened, setDrawerOpen] = useState(false)
     //for cart functionality
-    
+    let orderDetails = {}
     //status container
     const statusInfo = {
         isDrawerOpened,
-        setDrawerOpen
+        setDrawerOpen,
+        orderDetails
     }
 
     return (
