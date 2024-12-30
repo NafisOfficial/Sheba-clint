@@ -49,8 +49,9 @@ const SignUp = () => {
                         setErrorMessage("Failed to update user !");
                     })
             })
-            .catch(() => {
+            .catch((error) => {
                 toast.error("Failed to signup")
+                console.log(error);
                 setErrorMessage("Invalid email or password");
             })
 

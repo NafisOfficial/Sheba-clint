@@ -8,7 +8,8 @@ const CheckOut = () => {
     const [isCOD, setCOD] = useState(false);
     const [isCheckedTerms, setChecked] = useState(false)
     const { user } = useContext(AuthContext);
-    const { orderDetails } = useContext(StatusContext)
+    const { orderDetails } = useContext(StatusContext);
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -26,17 +27,32 @@ const CheckOut = () => {
         orderDetails.isCheckTermsAndCondition = isCheckedTerms
         orderDetails.currency = "BDT"
 
-        if(isCheckedTerms && user){
-           fetch(`https://sheba-server.vercel.app/carts/create-payment/${user?.email}`,{
+        if (isCheckedTerms && user) {
+            fetch(`http://localhost:3000/carts/create-payment/${user?.email}`, {
                 method: "POST",
-                headers:{
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                headers: {
+                    'Content-Type': 'application/json' // Change from 'application/x-www-form-urlencoded'
                 },
                 body: JSON.stringify(orderDetails)
             })
-            .then((res)=>console.log(res))
-            .catch((error)=>console.log(error))
-        }else{
+            .then((res) => res.json())
+            .then((data) => {
+                if (data?.GatewayPageURL) {
+                    // Ensure that you handle localhost URL dynamically in development and production
+                    const gatewayUrl = data.GatewayPageURL.startsWith("http")
+                        ? data.GatewayPageURL
+                        : `http://localhost:3000${data.GatewayPageURL}`;
+        
+                    // Navigate to the payment gateway URL
+                    window.location.href = gatewayUrl;
+                } else {
+                    console.error("Invalid GatewayPageURL received:", data);
+                }
+            })
+            .catch((error) => console.error("Error during fetch:", error));
+        }
+        
+        else{
             toast.error("Please check terms and condition")
         }
     }
