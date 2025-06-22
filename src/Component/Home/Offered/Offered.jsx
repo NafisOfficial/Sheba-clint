@@ -14,7 +14,8 @@ const Offered = () => {
             if(!res.ok){
                 throw new Error({errorMessage: "There was a server side error",status: 500})
             }else{
-                return res.json()
+                const json =  res.json()
+                return json.data;
             }
         })
         .then(data=>setOfferedProduct(data))

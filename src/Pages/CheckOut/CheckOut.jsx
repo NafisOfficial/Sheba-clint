@@ -38,7 +38,7 @@ const CheckOut = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data?.GatewayPageURL) {
-                    // Ensure that you handle localhost URL dynamically in development and production
+                    // Ensure handle localhost URL dynamically in development and production
                     const gatewayUrl = data.GatewayPageURL.startsWith("http")
                         ? data.GatewayPageURL
                         : `http://localhost:3000${data.GatewayPageURL}`;

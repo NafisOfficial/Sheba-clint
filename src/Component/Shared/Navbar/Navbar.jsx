@@ -92,6 +92,10 @@ const Options = {
         {
             tittle: "History",
             path: "/history"
+        },
+        {
+            tittle: "Admin Dashboard",
+            path:"/dashboard"
         }
     ]
 }

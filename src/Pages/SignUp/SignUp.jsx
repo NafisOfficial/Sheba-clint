@@ -1,5 +1,5 @@
 
-import { GoogleAuthProvider, updateProfile } from 'firebase/auth';
+import { updateProfile } from 'firebase/auth';
 import { useContext, useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
@@ -49,17 +49,15 @@ const SignUp = () => {
                         setErrorMessage("Failed to update user !");
                     })
             })
-            .catch((error) => {
+            .catch(() => {
                 toast.error("Failed to signup")
-                console.log(error);
                 setErrorMessage("Invalid email or password");
             })
 
     }
 
     const signUpByGoogle = () => {
-        const provider = new GoogleAuthProvider();
-        handleSignUpByGoogle(provider)
+        handleSignUpByGoogle()
             .then((userCredintial) => {
 
                 const user = userCredintial.user;
@@ -82,6 +80,7 @@ const SignUp = () => {
             })
             .catch((error) => {
                 toast.error("Failed to signup");
+                console.log(error);
                 setErrorMessage("There was a problem in server");
                 console.log(error);
             })

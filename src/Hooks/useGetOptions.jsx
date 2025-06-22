@@ -2,27 +2,26 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const useGetOptions = (optionName) => {
-    try {
-        const getOptions= async()=>{
-            const res = await fetch(`https://sheba-server.vercel.app/drugs/options/${optionName}`)
-            if(!res.ok){
-                throw new Error("Failed to fetch options");
-            }
-
-            return res.json();   
+    const getOptions = async () => {
+        const res = await fetch(`https://sheba-server.vercel.app/drugs/options/${optionName}`)
+        if (!res.ok) {
+            throw new Error("Failed to fetch options");
         }
 
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const {isLoading,data:options=[]} = useQuery({
-            queryKey: ["options",optionName],
-            queryFn: getOptions,
-            enabled: !!optionName
-        })
-
-        return [isLoading,options];
-    } catch (error) {
-        console.log("Error to get options",error)
+        const json = await res.json();
+        console.log(json);
+        return json?.data;
     }
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { isLoading, data: options = [] } = useQuery({
+        queryKey: ["options", optionName],
+        queryFn: getOptions,
+        enabled: !!optionName
+    })
+
+    return [isLoading, options];
+
 };
 
 export default useGetOptions;

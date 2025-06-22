@@ -6,7 +6,7 @@ import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 const Profile = () => {
     const { user,dbUser,setdbUser } = useContext(AuthContext)
 
-    const notSet = "not set yet !";
+    const notSet = "not set yet!";
 
 
 
@@ -15,7 +15,7 @@ const Profile = () => {
             try {
                 const response = await fetch(`https://sheba-server.vercel.app/users/${user?.email}`)
                 const json = await response.json()
-                setdbUser(json)
+                setdbUser(json.data)
             } catch (error) {
                 console.log(error);
             }

@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
         return fetch(`https://sheba-server.vercel.app/drugs/single-drug/${drugId}`)
                 .then(res=>res.json())
                 .then(drug=>{
-                  return drug
+                  return drug.data
                 })
                 .catch(()=>toast.error("Failed to get drug"))
       }
@@ -96,7 +96,7 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path: "/dashbord",
+    path: "/dashboard",
     element: <Dashbord />
   }
 ]);

@@ -62,7 +62,7 @@ const HomeLayout = () => {
             <input id="my-drawer-2" checked={isDrawerOpened} readOnly type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center justify-center">
                 {/*--------------------------- main body content  ------------------------------*/}
-                {filteredData.length > 0 ? <MostOrdered data={filteredData} isLoading={isLoading} /> : noData}
+                {filteredData?.length > 0 ? <MostOrdered data={filteredData} isLoading={isLoading} /> : noData}
             </div>
             <div className="drawer-side top-20 mb-4 ms-2 z-20">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
