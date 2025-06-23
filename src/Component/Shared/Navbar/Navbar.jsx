@@ -51,7 +51,7 @@ const Navbar = () => {
                     <RxHamburgerMenu onClick={()=>setDrawerOpen(true)} className='block md:hidden text-2xl ms-2'/>
                 </div>
                 <div className='navbar-center hidden md:flex cursor-pointer'>
-                    <div className='w-80 bg-white text-gray-400 px-3 py-2 rounded-l-lg' >Enter your keyword...</div>
+                    <input className='w-80 bg-white text-black focus:outline-none px-3 py-2 rounded-l-lg' placeholder='Enter your keyword...'/>
                     <div className='bg-info px-5 py-2 rounded-r-lg'><FaSearch className='text-2xl text-white'/></div>
                 </div>
                 <div className="navbar-end">

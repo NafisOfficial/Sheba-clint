@@ -1,10 +1,10 @@
 import DrugCard from "../../Shared/DrugCard/DrugCard";
 
-const MostOrdered = ({data,isLoading}) => {
+const MostOrdered = ({data}) => {
 
 
-    if(isLoading){
-        return <span className="loading loading-spinner loading-lg"></span>
+    if(data?.length === 0){
+        return <div className='h-full'>No data avialable</div>
     }
 
 
