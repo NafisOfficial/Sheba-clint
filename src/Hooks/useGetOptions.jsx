@@ -20,7 +20,6 @@ const useGetOptions = (optionObj) => {
         }
 
         const json = await res.json();
-        console.log(json.data);
         return json?.data;
     }
 

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FaSearch } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from 'react-router-dom';
@@ -7,13 +7,16 @@ import logo from '../../../assets/images/logos/logos.png';
 import useCart from '../../../Hooks/useCart';
 import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
 import { StatusContext } from '../../../Provider/StatusProvider/StatusProvider';
+import useGetSearchProduct from '../../../Hooks/useGetSearchProduct';
+import Search from '../Search/Search';
 
 
 const Navbar = () => {
     const { user, handleLogOut } = useContext(AuthContext)
     const [, allCarts] = useCart();
     const {setDrawerOpen} = useContext(StatusContext);
-
+    const [searchInput, getSearchInput] = useState();
+    const [isLoadingForSearch, searchedData] = useGetSearchProduct(searchInput);
 
 
     const signOut = () => {
@@ -25,6 +28,8 @@ const Navbar = () => {
                 toast.error("Internal server error");
             })
     }
+
+
 
 
     const userDropdown = <div className="dropdown dropdown-end">
@@ -51,8 +56,9 @@ const Navbar = () => {
                     <RxHamburgerMenu onClick={()=>setDrawerOpen(true)} className='block md:hidden text-2xl ms-2'/>
                 </div>
                 <div className='navbar-center hidden md:flex cursor-pointer'>
-                    <input className='w-80 bg-white text-black focus:outline-none px-3 py-2 rounded-l-lg' placeholder='Enter your keyword...'/>
-                    <div className='bg-info px-5 py-2 rounded-r-lg'><FaSearch className='text-2xl text-white'/></div>
+                    <input onChange={(event)=>getSearchInput(event.target.value)} className='w-80 bg-white text-black focus:outline-none px-3 py-2 rounded-l-lg' placeholder='Enter your keyword...'/>
+                    <div className='bg-info px-7 py-2 rounded-r-lg'><FaSearch className='text-2xl text-white'/></div>
+                    {searchInput === undefined || searchInput?.length===0 ?<></>:<Search loading={isLoadingForSearch} data={searchedData}/>}
                 </div>
                 <div className="navbar-end">
                     <div>
