@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { FaSearch } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import logo from '../../../assets/images/logos/logos.png';
 import useCart from '../../../Hooks/useCart';
@@ -12,13 +12,36 @@ import Search from '../Search/Search';
 
 
 const Navbar = () => {
+
+    // Hooks 
     const { user, handleLogOut } = useContext(AuthContext)
     const [, allCarts] = useCart();
-    const {setDrawerOpen} = useContext(StatusContext);
+    const { setDrawerOpen } = useContext(StatusContext);
     const [searchInput, getSearchInput] = useState();
+    const [isSearchBarOpen, setSearchBarOpen] = useState(false);
     const [isLoadingForSearch, searchedData] = useGetSearchProduct(searchInput);
+    const searchRef = useRef();
+    const location = useLocation();
+
+    // hide search results
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setSearchBarOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+    }, [])
+
+    useEffect(() => {
+        setSearchBarOpen(false);
+    }, [location?.pathname]);
 
 
+    // handler function 
     const signOut = () => {
         handleLogOut()
             .then(() => {
@@ -31,6 +54,7 @@ const Navbar = () => {
 
 
 
+    // render HTML
 
     const userDropdown = <div className="dropdown dropdown-end">
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -46,19 +70,21 @@ const Navbar = () => {
         </ul>
     </div>
 
-    
+
 
     return (
         <div className='sticky top-0 z-30'>
             <div className="navbar bg-[#D6AD60] pe-3 md:pe-5">
                 <div className="navbar-start">
                     <Link to="/" className="btn btn-ghost md:text-xl md:flex text-sm hidden"><img className='md:h-5 md:w-5 h-4 w-4' src={logo} alt="logo" />Sheba</Link>
-                    <RxHamburgerMenu onClick={()=>setDrawerOpen(true)} className='block md:hidden text-2xl ms-2'/>
+                    <RxHamburgerMenu onClick={() => setDrawerOpen(true)} className='block md:hidden text-2xl ms-2' />
                 </div>
                 <div className='navbar-center hidden md:flex cursor-pointer'>
-                    <input onChange={(event)=>getSearchInput(event.target.value)} className='w-80 bg-white text-black focus:outline-none px-3 py-2 rounded-l-lg' placeholder='Enter your keyword...'/>
-                    <div className='bg-info px-7 py-2 rounded-r-lg'><FaSearch className='text-2xl text-white'/></div>
-                    {searchInput === undefined || searchInput?.length===0 ?<></>:<Search loading={isLoadingForSearch} data={searchedData}/>}
+                    <input onFocus={() => setSearchBarOpen(true)} onChange={(event) => getSearchInput(event.target.value)} className='w-80 bg-white text-black focus:outline-none px-3 py-2 rounded-l-lg' placeholder='Enter your keyword...' />
+                    <div className='bg-info cursor-default px-7 py-2 rounded-r-lg'><FaSearch className='text-2xl text-white' /></div>
+                    {searchInput === undefined || searchInput?.length === 0 || isSearchBarOpen === false ? <></> : <div ref={searchRef} className='bg-white fixed top-14 flex flex-col py-5 px-2 rounded cursor-default'>
+                        <Search loading={isLoadingForSearch} data={searchedData} />
+                    </div>}
                 </div>
                 <div className="navbar-end">
                     <div>
@@ -101,7 +127,7 @@ const Options = {
         },
         {
             tittle: "Admin Dashboard",
-            path:"/dashboard"
+            path: "/dashboard"
         }
     ]
 }
