@@ -21,7 +21,7 @@ const Dashbord = () => {
                         </svg>
                     </label>
                     <div className="flex flex-col w-full gap-3 px-5">{
-                        Options.map((data)=><button key={data.id} className={`btn  btn-md text-white ${location.pathname === `${data.path}`? "btn-info":"btn-warning"}`}><Link to={data.path}>{data.name}</Link></button>)
+                        Options.map((data)=><Link key={data.id} to={data.path} className={`btn  btn-md text-white ${location.pathname === `${data.path}`? "btn-info":"btn-warning"}`}>{data.name}</Link>)
                     }
                     </div>
                     <div className="text-white w-full bg-black py-3 text-center">
