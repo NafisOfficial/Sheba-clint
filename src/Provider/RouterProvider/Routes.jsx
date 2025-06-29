@@ -10,7 +10,6 @@ import AllMedicine from "../../Pages/AllMedicine/AllMedicine";
 import Carts from "../../Pages/Carts/Carts";
 import DrugDetails from "../../Pages/DrugDetails/DrugDetails";
 import Home from "../../Pages/Home/Home";
-import InfoPage from "../../Pages/InfoPage/InfoPage";
 import Login from "../../Pages/Login/Login";
 import News from "../../Pages/News/News";
 import Payment from "../../Pages/Payment/Payment";
@@ -20,6 +19,9 @@ import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
 import CheckOut from "../../Pages/CheckOut/CheckOut";
 import SuccessTr from "../../Pages/SuccessTr/SuccessTr";
 import OrderHistory from "../../Pages/History/OrderHistory";
+import ManageUser from "../../Pages/ManageUser/ManageUser";
+import ManageProducts from "../../Pages/ManageProducts/ManageProducts";
+import ManageOrder from "../../Pages/ManageOrder/ManageOrder";
 
 
 export const router = createBrowserRouter([
@@ -88,15 +90,24 @@ export const router = createBrowserRouter([
                 })
                 .catch(()=>toast.error("Failed to get drug"))
       }
-    },
-    {
-      path: "/info",
-      element: <InfoPage />
     }
     ]
   },
   {
     path: "/dashboard",
-    element: <Dashbord />
+    element: <Dashbord />,
+    children:[{
+      path: "/dashboard/manage-users",
+      element:<ManageUser/>
+    },
+    {
+      path:"/dashboard/manage-products",
+      element:<ManageProducts/>
+    },
+    {
+      path: "/dashboard/manage-orders",
+      element:<ManageOrder/>
+    }
+  ]
   }
 ]);

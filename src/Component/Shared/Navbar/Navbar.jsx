@@ -127,7 +127,7 @@ const Options = {
         },
         {
             tittle: "Admin Dashboard",
-            path: "/dashboard"
+            path: "/dashboard/manage-users"
         }
     ]
 }
