@@ -12,7 +12,7 @@ const useGetProduct = () => {
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { data:drugs=[], isLoading, } = useQuery({
+    const { data:drugs=[], isLoading } = useQuery({
         queryKey: ["drugs", "mostOrdered"],
         queryFn: getProduct
     })
