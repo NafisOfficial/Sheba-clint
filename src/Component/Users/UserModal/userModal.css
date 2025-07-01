@@ -1,0 +1,29 @@
+
+.btn-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+}
+.Modal, .Overlay{
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.Overlay{
+    background: rgba(199, 187, 133, 0.8);
+}
+
+.modalContent{
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    width: 400px;
+    background-color: white;
+    border-radius: 0.75rem;
+}

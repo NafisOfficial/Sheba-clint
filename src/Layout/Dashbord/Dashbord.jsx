@@ -2,10 +2,9 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Dashbord = () => {
     const location = useLocation();
-    console.log(location.pathname);
     return (
         <div className="flex">
-            <aside className="w-[300px] h-screen border-gray-400 bg-[#D6AD60] border-r-[1px] pt-5">
+            <aside className="w-[300px] h-screen border-gray-400 bg-[#D6AD60] border-r-[1px] pt-5 sticky top-0">
                 <nav className="flex flex-col items-center justify-between h-full">
                     <label className="input input-bordered flex items-center input-sm gap-2">
                         <input type="text" className="grow" placeholder="Search" />
