@@ -53,7 +53,7 @@ const useUserHandler = (needUsers) => {
                     },
                     body: JSON.stringify(userObject)
                 }).then(()=>{
-                    toast.success("User update successful");
+                    toast.success("User update successfully");
                     navigate("/profile");
                 }).catch(()=>{
                     toast.error("Failed to update data")
@@ -64,9 +64,26 @@ const useUserHandler = (needUsers) => {
         }
     })
 
+    const deleteUser = useMutation({
+        mutationFn: ({email})=>{
+            fetch(`http://localhost:3000/users/delete/${email}`,{
+                    method:"DELETE",
+                }).then(()=>{
+                    toast.success("User deleted successful");
+                }).catch(()=>{
+                    toast.error("Failed to delete user");
+                })
+        },
+        onSuccess: ()=>{
+            queryClient.invalidateQueries({ queryKey: ["users"] })
+        }
+    })
+
+
+
     
 
-    return {getAllUser, postUser, updateUser}
+    return {getAllUser, postUser, updateUser, deleteUser}
 };
 
 export default useUserHandler;

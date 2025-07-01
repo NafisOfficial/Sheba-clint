@@ -1,14 +1,20 @@
+import useUserHandler from "../../../Hooks/useUserHandler";
 
 
 
-const UsersCard = ({ user,callbackUser,action }) => {
+const UsersCard = ({ user,callbackUser,action,refetch }) => {
     const { phone, photoURl, name, email } = user;
+    const {deleteUser} = useUserHandler();
 
-    console.log(user);
     
     const handleUpdate =() =>{
         callbackUser(user);
         action(true);
+    }
+
+    const handleDelete=()=>{
+        deleteUser.mutate({email});
+        refetch();
     }
 
     return (
@@ -23,7 +29,7 @@ const UsersCard = ({ user,callbackUser,action }) => {
             </div>
             <div className="flex justify-between items-center px-5 pb-5">
                 <button onClick={handleUpdate} className="btn btn-info btn-sm">Update</button>
-                <button className="btn btn-info btn-sm">Delete</button>
+                <button onClick={handleDelete} className="btn btn-info btn-sm">Delete</button>
             </div>
         </div>
     );

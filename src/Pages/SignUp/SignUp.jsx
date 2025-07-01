@@ -24,7 +24,8 @@ const SignUp = () => {
 
         userObject.name = name;
         userObject.email = email;
-        userObject.photoURl = "https://i.ibb.co/GtWpN1b/image.png"
+        userObject.photoURl = "https://i.ibb.co/GtWpN1b/image.png";
+        userObject.role = "user";
 
         handleSignUp(email, password)
             .then(() => {
@@ -64,6 +65,7 @@ const SignUp = () => {
                 userObject.name = user?.displayName;
                 userObject.email = user?.email;
                 userObject.photoURl = user?.photoURL || "https://i.ibb.co/GtWpN1b/image.png"
+                 userObject.role = "user";
 
                 fetch('https://sheba-server.vercel.app/users', {
                     method: "POST",

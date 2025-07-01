@@ -10,7 +10,7 @@ const ManageUser = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [singleUser, setSingleUser] = useState({});
     const {getAllUser} = useUserHandler(true);
-    const {data: users=[],isLoading} = getAllUser;
+    const {data: users=[],isLoading,refetch} = getAllUser;
     
     if(isLoading){
         return <div className="flex flex-col justify-center items-center w-full h-full">
@@ -25,7 +25,7 @@ const ManageUser = () => {
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 m-5">
-            {users?.map((user)=><UsersCard key={user._id} user={user} action={setModalOpen}  callbackUser={setSingleUser}/>)}
+            {users?.map((user)=><UsersCard key={user._id} user={user} action={setModalOpen} refetch={refetch}  callbackUser={setSingleUser}/>)}
         </div>
     );
 };

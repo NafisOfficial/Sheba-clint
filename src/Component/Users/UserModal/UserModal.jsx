@@ -6,6 +6,8 @@ const UserModal = ({ singleUser, action }) => {
     const handleClose = () => {
         action(false);
     }
+
+    
     return (
         <>
             <div className="Modal">
