@@ -80,11 +80,9 @@ const SignUp = () => {
                 navigate(from, { replace: true })
                 toast.success("Signup successful");
             })
-            .catch((error) => {
+            .catch(() => {
                 toast.error("Failed to signup");
-                console.log(error);
                 setErrorMessage("There was a problem in server");
-                console.log(error);
             })
     }
 

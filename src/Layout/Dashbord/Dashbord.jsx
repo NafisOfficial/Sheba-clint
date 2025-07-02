@@ -1,4 +1,5 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const Dashbord = () => {
     const location = useLocation();
@@ -20,7 +21,7 @@ const Dashbord = () => {
                         </svg>
                     </label>
                     <div className="flex flex-col w-full gap-3 px-5">{
-                        Options.map((data)=><Link key={data.id} to={data.path} className={`btn  btn-md text-white ${location.pathname === `${data.path}`? "btn-info":"btn-warning"}`}>{data.name}</Link>)
+                        Options.map((data) => <Link key={data.id} to={data.path} className={`btn  btn-md text-white ${location.pathname === `${data.path}` ? "btn-info" : "btn-warning"}`}>{data.name}</Link>)
                     }
                     </div>
                     <div className="text-white w-full bg-black py-3 text-center">
@@ -29,8 +30,21 @@ const Dashbord = () => {
                 </nav>
             </aside>
             <main className="w-full">
-                <Outlet/>
+                <Outlet />
             </main>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover={false}
+                theme="light"
+                transition:Bounce
+            />
         </div>
     );
 };

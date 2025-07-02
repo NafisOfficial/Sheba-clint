@@ -1,9 +1,10 @@
+import { toast } from "react-toastify";
 import useUserHandler from "../../../Hooks/useUserHandler";
 
 
 
 const UsersCard = ({ user,callbackUser,action,refetch }) => {
-    const { phone, photoURl, name, email } = user;
+    const { phone, photoURl, name, email, role } = user;
     const {deleteUser} = useUserHandler();
 
     
@@ -13,7 +14,17 @@ const UsersCard = ({ user,callbackUser,action,refetch }) => {
     }
 
     const handleDelete=()=>{
-        deleteUser.mutate({email});
+        deleteUser.mutate({email},
+            {
+                onSuccess: ()=>{
+                    toast.success("Deleted successfully");
+                    refetch()
+                },
+                onError: ()=>{
+                    toast.error("Failed to delete user");
+                }
+            }
+        );
         refetch();
     }
 
@@ -26,6 +37,7 @@ const UsersCard = ({ user,callbackUser,action,refetch }) => {
                 <p><strong>Name:</strong> {name}</p>
                 <p><strong>Email:</strong> {email}</p>
                 <p><strong>Phone:</strong> {phone}</p>
+                <p><strong>Role:</strong> {role}</p>
             </div>
             <div className="flex justify-between items-center px-5 pb-5">
                 <button onClick={handleUpdate} className="btn btn-info btn-sm">Update</button>

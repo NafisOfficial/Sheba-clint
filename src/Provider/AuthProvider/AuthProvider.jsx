@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from "../Firebase/Firebase.config";
+import { deleteUser } from "firebase/auth/cordova";
 
 export const AuthContext = createContext(null)
 
@@ -30,6 +31,11 @@ const AuthProvider = ( {children} ) => {
         return signOut(auth);
     }
 
+    console.log(auth.currentUser);
+    const handleDelete=()=>{
+        return deleteUser(auth.currentUser);
+    }
+
     //get the user
     useEffect(()=>{
         const unSubscribe = onAuthStateChanged(auth,loggedUser=>{
@@ -54,6 +60,7 @@ const AuthProvider = ( {children} ) => {
         handleSignUp,
         handleSignUpByGoogle,
         handleLogOut,
+        handleDelete
     }
 
     return (

@@ -1,11 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider/AuthProvider";
 
 
 const useUserHandler = (needUsers) => {
-
-    const navigate = useNavigate();
+    const {handleDelete} = useContext(AuthContext);
 
     const getAllUser = useQuery({
         queryKey: ["users"],
@@ -21,69 +20,57 @@ const useUserHandler = (needUsers) => {
         enabled: needUsers
     })
 
-    
 
-    const queryClient = useQueryClient();
+
 
     const postUser = useMutation({
         mutationFn: async (userObject) => {
-        const res = await fetch('https://sheba-server.vercel.app/users', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userObject)
-        })
-        if (!res.ok) {
-            throw new Error("Failed to post user data");
-        }
-    },
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["users"] })
-        }
+            const res = await fetch('https://sheba-server.vercel.app/users', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userObject)
+            })
+            if (!res.ok) {
+                throw new Error("Failed to post user data");
+            }
+        },
     })
 
 
     const updateUser = useMutation({
-        mutationFn: (email,userObject)=>{
-            fetch(`https://sheba-server.vercel.app/users/update/${email}`,{
-                    method:"PATCH",
-                    headers:{
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(userObject)
-                }).then(()=>{
-                    toast.success("User update successfully");
-                    navigate("/profile");
-                }).catch(()=>{
-                    toast.error("Failed to update data")
-                })
+        mutationFn: async (email, userObject) => {
+            const res = await fetch(`https://sheba-server.vercel.app/users/update/${email}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userObject)
+            })
+
+            if (!res.ok) {
+                throw new Error("Failed to delete user");
+            }
         },
-        onSuccess: ()=>{
-            queryClient.invalidateQueries({ queryKey: ["users"] })
-        }
     })
 
     const deleteUser = useMutation({
-        mutationFn: ({email})=>{
-            fetch(`http://localhost:3000/users/delete/${email}`,{
-                    method:"DELETE",
-                }).then(()=>{
-                    toast.success("User deleted successful");
-                }).catch(()=>{
-                    toast.error("Failed to delete user");
-                })
+        mutationFn: async ({ email }) => {
+            const res = await fetch(`http://localhost:3000/users/delete/${email}`, {
+                method: "DELETE",
+            })
+            if (!res.ok) {
+                throw new Error("Failed to delete user");
+            }
         },
-        onSuccess: ()=>{
-            queryClient.invalidateQueries({ queryKey: ["users"] })
-        }
     })
 
 
 
-    
 
-    return {getAllUser, postUser, updateUser, deleteUser}
+
+    return { getAllUser, postUser, updateUser, deleteUser }
 };
 
 export default useUserHandler;
