@@ -1,10 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider/AuthProvider";
 
 
 const useUserHandler = (needUsers) => {
-    const {handleDelete} = useContext(AuthContext);
+    
 
     const getAllUser = useQuery({
         queryKey: ["users"],
@@ -40,13 +38,13 @@ const useUserHandler = (needUsers) => {
 
 
     const updateUser = useMutation({
-        mutationFn: async (email, userObject) => {
-            const res = await fetch(`https://sheba-server.vercel.app/users/update/${email}`, {
+        mutationFn: async ({email, singleUser}) => {
+            const res = await fetch(`http://localhost:3000/users/update/${email}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(userObject)
+                body: JSON.stringify(singleUser)
             })
 
             if (!res.ok) {

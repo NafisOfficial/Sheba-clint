@@ -20,7 +20,7 @@ const ManageUser = () => {
     }
 
     if(!isLoading && isModalOpen === true){
-        return <UserModal singleUser={singleUser} action={setModalOpen}/>
+        return <UserModal singleUser={singleUser} action={setModalOpen} refetch={refetch}/>
     }
 
     return (

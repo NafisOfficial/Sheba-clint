@@ -31,7 +31,6 @@ const AuthProvider = ( {children} ) => {
         return signOut(auth);
     }
 
-    console.log(auth.currentUser);
     const handleDelete=()=>{
         return deleteUser(auth.currentUser);
     }

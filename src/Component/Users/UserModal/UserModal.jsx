@@ -1,13 +1,37 @@
+import { useState } from 'react';
+import useUserHandler from '../../../Hooks/useUserHandler';
 import './userModal.css'
+import { toast } from 'react-toastify';
 
-const UserModal = ({ singleUser, action }) => {
-    const { phone, photoURl, name, email } = singleUser;
+const UserModal = ({ singleUser, action, refetch }) => {
+    const { phone, photoURl, name, email, role, restricted = false } = singleUser;
+    const [isAdmin, setAdmin] = useState(role === "admin"? true:false);
+    const [isRestricted, setRestricted] = useState(restricted);
+    const { updateUser } = useUserHandler();
 
     const handleClose = () => {
         action(false);
     }
 
-    
+    const handleUpdate = () => {
+        singleUser.role = isAdmin ? "admin" : "user",
+        singleUser.restricted = isRestricted
+
+        updateUser.mutate({ email, singleUser },
+            {
+                onSuccess: () => {
+                    toast.success("update successfully");
+                    refetch()
+                },
+                onError: () => {
+                    toast.error("Failed to update user");
+                }
+            }
+        );
+    }
+
+
+
     return (
         <>
             <div className="Modal">
@@ -21,19 +45,20 @@ const UserModal = ({ singleUser, action }) => {
                                 <p><strong>Name:</strong> {name}</p>
                                 <p><strong>Email:</strong> {email}</p>
                                 <p><strong>Phone:</strong> {phone}</p>
+                                <p><strong>Role:</strong> {role}</p>
                                 <div className='flex flex-col gap-1'>
                                     <div className='flex justify-between items-center'>
                                         <strong>Admin:</strong>
-                                        <input type="checkbox" className="toggle toggle-warning" />
+                                        <input onClick={() => setAdmin(!isAdmin)} defaultChecked={role === "admin"?true:false} type="checkbox" className="toggle toggle-warning" />
                                     </div>
                                     <div className='flex justify-between items-center'>
                                         <strong>Restricted:</strong>
-                                        <input type="checkbox" className="toggle toggle-warning" />
+                                        <input onClick={() => setRestricted(!isRestricted)} defaultChecked={restricted===true?true:false} type="checkbox" className="toggle toggle-warning" />
                                     </div>
                                 </div>
                             </div>
                             <div className="px-5 pb-5">
-                                <button className="btn btn-info btn-sm">Update</button>
+                                <button onClick={handleUpdate} className="btn btn-info btn-sm">Update</button>
                             </div>
                         </div>
                         <button onClick={handleClose} className='btn btn-info btn-close'>Close</button>
