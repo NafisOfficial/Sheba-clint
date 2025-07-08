@@ -23,7 +23,7 @@ const useUserHandler = (needUsers) => {
 
     const postUser = useMutation({
         mutationFn: async (userObject) => {
-            const res = await fetch('https://sheba-server.vercel.app/users', {
+            const res = await fetch('http://localhost:3000/users', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

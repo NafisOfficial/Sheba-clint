@@ -1,9 +1,9 @@
-import { GoPlus } from "react-icons/go";
-import { FiMinus } from "react-icons/fi";
-import { MdDelete } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
+import { FiMinus } from "react-icons/fi";
+import { GoPlus } from "react-icons/go";
+import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
 
 const CartDetails = ({data,object,index}) => {
 
@@ -19,7 +19,7 @@ const CartDetails = ({data,object,index}) => {
 
     const handleDelete = (_id) => {
         if (user) {
-            fetch(`https://sheba-server.vercel.app/carts/delete/singleCart?email=${user?.email}&&id=${_id}`, {
+            fetch(`http://localhost:3000/carts/delete/singleCart?email=${user?.email}&&id=${_id}`, {
                 method: "DELETE"
             })
                 .then(() => {

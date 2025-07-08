@@ -7,12 +7,11 @@ import { AuthContext } from "../Provider/AuthProvider/AuthProvider";
 const useCart = () => {
     const { user } = useContext(AuthContext);
     const fetchCart = async () => {
-        const result = await fetch(`https://sheba-server.vercel.app/carts?email=${user?.email}`)
+        const result = await fetch(`http://localhost:3000/carts?email=${user?.email}`)
         if (!result.ok) {
             throw new Error("Failed to fetch cart data")
         }
         const json = await result.json();
-        
         return json.data;
     }
 

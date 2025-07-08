@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
-import useCart from "../../Hooks/useCart";
-import { toast } from "react-toastify";
 import { FaCheck } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import useCart from "../../Hooks/useCart";
+import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 
 const DrugDetails = () => {
     const [cartPostStatus, setCartPostStatus] = useState("notPosted")
@@ -20,7 +20,7 @@ const DrugDetails = () => {
         if (user) {
             const cartObject = { drugId: _id, image, form, brand, dose, generic, quantity: 1, productType: "strip", subTotal: price_per_unit*10, price_per_unit, userEmail: user.email }
             setCartPostStatus("loading")
-            fetch('https://sheba-server.vercel.app/carts', {
+            fetch('http://localhost:3000/carts', {
                 method: "POST",
                 headers: {
                     "Content-type": "Application/json"

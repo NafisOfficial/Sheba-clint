@@ -14,7 +14,7 @@ const useGetOptions = (optionObj) => {
 
 
     const getOptions = async () => {
-        const res = await fetch(`https://sheba-server.vercel.app/drugs/options?${searchString}`)
+        const res = await fetch(`http://localhost:3000/drugs/options?${searchString}`)
         if (!res.ok) {
             throw new Error("Failed to fetch options");
         }
