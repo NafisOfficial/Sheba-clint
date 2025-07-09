@@ -43,7 +43,9 @@ const useAddToCart = (data) => {
   
 
     const handleDelete = ()=>{
-
+        fetch("")
+        .then()
+        .catch()
     }
 
 

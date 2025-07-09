@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import DrugCard from "../../Component/Shared/DrugCard/DrugCard";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 
 const ManageProducts = () => {
@@ -29,7 +30,6 @@ const ManageProducts = () => {
             })
     }, [page])
 
-    console.log(drugs.totalDrug);
 
 
     // if () {
@@ -42,7 +42,7 @@ const ManageProducts = () => {
     return (
         <div className="my-3 flex flex-col justify-between h-[92%] mx-5">
             <div className="ms-auto">
-                <button className="btn btn-info">Add a item</button>
+                <Link to="/dashboard/add-products" className="btn btn-info">Add a item</Link>
             </div>
             <div className="grid grid-cols-2 gap-2 mx-3 md:grid-cols-4 my-5">
                 {drugs?.allDrugs?.map((drug) => <DrugCard key={drug._id} data={drug} />)}

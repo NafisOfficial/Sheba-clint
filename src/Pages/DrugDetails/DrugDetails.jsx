@@ -1,17 +1,20 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useCart from "../../Hooks/useCart";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 
 const DrugDetails = () => {
-    const [cartPostStatus, setCartPostStatus] = useState("notPosted")
+    const [cartPostStatus, setCartPostStatus] = useState("notPosted");
+    const [editAble, setEditAble] = useState(false);
     const drug = useLoaderData();
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     const [refetch] = useCart();
     const navigate = useNavigate();
+    const location = useLocation();
+
 
     const { _id, form, image, brand, dose, generic, price_per_unit, indications, interaction, mode_of_action, precautions_and_warnings, pregnancy_and_lactation, side_effects } = drug;
 
@@ -39,8 +42,22 @@ const DrugDetails = () => {
         }
     }
 
+    useEffect(()=>{
+        if(_id && location?.pathname === `/dashboard/details/${_id}`){
+             setEditAble(true)
+        }
+    },[_id,location])
+
+    const handleUpdate =()=>{
+
+    }
+
+ 
 
     const handleCartCurrentStatus = () => {
+        if(editAble){
+             return <button onClick={handleUpdate} className="btn btn-sm ms-auto btn-info rounded-full">Update</button>
+        }
         if (cartPostStatus === "notPosted") {
             return <button onClick={addToCart} className="btn btn-sm ms-auto btn-info rounded-full"><IoCartOutline className="text-xl" /></button>
         }
@@ -48,7 +65,7 @@ const DrugDetails = () => {
             return <div className="btn btn-sm ms-auto btn-info rounded-full"><span className="loading loading-spinner loading-xs"></span></div>
         }
         if (cartPostStatus === "posted") {
-            return <button onClick={addToCart} className="btn btn-sm ms-auto btn-info rounded-full"><FaCheck className="text-xl" /></button>
+            return <button className="btn btn-sm ms-auto btn-info rounded-full"><FaCheck className="text-xl" /></button>
         }
     }
     return (

@@ -22,6 +22,7 @@ import Profile from "../../Pages/Profile/Profile";
 import SignUp from "../../Pages/SignUp/SignUp";
 import SuccessTr from "../../Pages/SuccessTr/SuccessTr";
 import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
+import AddProduct from "../../Pages/AddProduct/AddProduct";
 
 
 export const router = createBrowserRouter([
@@ -103,6 +104,23 @@ export const router = createBrowserRouter([
     {
       path:"/dashboard/manage-products",
       element:<ManageProducts/>
+    },
+    {
+      path: "/dashboard/add-products",
+      element:<AddProduct/>
+    },
+    {
+      path:"/dashboard/details/:_id",
+      element:<DrugDetails/>,
+      loader:({params})=>{
+        const drugId = params._id;
+        return fetch(`http://localhost:3000/drugs/single-drug/${drugId}`)
+                .then(res=>res.json())
+                .then(drug=>{
+                  return drug.data
+                })
+                .catch(()=>toast.error("Failed to get drug"))
+      }
     },
     {
       path: "/dashboard/manage-orders",

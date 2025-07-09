@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useAddToCart from "../../../Hooks/useAddToCart";
 
 const DrugCard = ({ data }) => {
-
     const { _id,image, form, brand, dose, generic, price_per_unit, company_name } = data;
-    const {handleCartCurrentStatus} = useAddToCart(data)
+    const {handleCartCurrentStatus} = useAddToCart(data);
+    const location = useLocation();
 
     return (
         <div>
@@ -23,7 +23,7 @@ const DrugCard = ({ data }) => {
                         </div>
                     </div>
                     <div className="card-actions mt-2 mb-3 md:mb-5">
-                        <button className="btn btn-sm btn-info rounded-full text-white"><Link to={`/details/${_id}`}>Details</Link></button>
+                        {location.pathname === "/dashboard/manage-products"?<Link className="btn btn-sm btn-info rounded-full text-white" to={`/dashboard/details/${_id}`}>Details</Link>:<Link className="btn btn-sm btn-info rounded-full text-white" to={`/details/${_id}`}>Details</Link>}
                         {handleCartCurrentStatus()}
                     </div>
                 </div>
