@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useCart from "../../Hooks/useCart";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
@@ -48,15 +48,12 @@ const DrugDetails = () => {
         }
     },[_id,location])
 
-    const handleUpdate =()=>{
-
-    }
 
  
 
     const handleCartCurrentStatus = () => {
         if(editAble){
-             return <button onClick={handleUpdate} className="btn btn-sm ms-auto btn-info rounded-full">Update</button>
+             return <Link to="/dashboard/product/update" className="btn btn-sm ms-auto btn-info rounded-full">Update</Link>
         }
         if (cartPostStatus === "notPosted") {
             return <button onClick={addToCart} className="btn btn-sm ms-auto btn-info rounded-full"><IoCartOutline className="text-xl" /></button>

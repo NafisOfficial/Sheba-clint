@@ -23,6 +23,7 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import SuccessTr from "../../Pages/SuccessTr/SuccessTr";
 import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
 import AddProduct from "../../Pages/AddProduct/AddProduct";
+import UpdateProduct from "../../Pages/UpdateProduct/UpdateProduct";
 
 
 export const router = createBrowserRouter([
@@ -108,6 +109,10 @@ export const router = createBrowserRouter([
     {
       path: "/dashboard/add-products",
       element:<AddProduct/>
+    },
+    {
+      path: "/dashboard/product/update",
+      element:<UpdateProduct/>
     },
     {
       path:"/dashboard/details/:_id",
