@@ -43,9 +43,16 @@ const useAddToCart = (data) => {
   
 
     const handleDelete = ()=>{
-        fetch("")
-        .then()
-        .catch()
+        fetch(`http://localhost:3000/drugs/all-drugs/${_id}`,{
+            method: "DELETE"
+        })
+        .then(()=>{
+            toast.success("Deleted");
+            refetch();
+        })
+        .catch(()=>{
+            toast.error("Failed");
+        })
     }
 
 
