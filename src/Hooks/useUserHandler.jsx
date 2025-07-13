@@ -7,7 +7,7 @@ const useUserHandler = (needUsers) => {
     const getAllUser = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:3000/users/all")
+            const res = await fetch("https://sheba-server.vercel.app/users/all")
             if (!res.ok) {
                 throw new Error("Failed to fetch users data");
             }
@@ -23,7 +23,7 @@ const useUserHandler = (needUsers) => {
 
     const postUser = useMutation({
         mutationFn: async (userObject) => {
-            const res = await fetch('http://localhost:3000/users', {
+            const res = await fetch('https://sheba-server.vercel.app/users', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ const useUserHandler = (needUsers) => {
 
     const updateUser = useMutation({
         mutationFn: async ({email, singleUser}) => {
-            const res = await fetch(`http://localhost:3000/users/update/${email}`, {
+            const res = await fetch(`https://sheba-server.vercel.app/users/update/${email}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
@@ -55,7 +55,7 @@ const useUserHandler = (needUsers) => {
 
     const deleteUser = useMutation({
         mutationFn: async ({ email }) => {
-            const res = await fetch(`http://localhost:3000/users/delete/${email}`, {
+            const res = await fetch(`https://sheba-server.vercel.app/users/delete/${email}`, {
                 method: "DELETE",
             })
             if (!res.ok) {

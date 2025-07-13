@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthProvider/AuthProvider";
 import useCart from "./useCart";
-import { MdDelete } from "react-icons/md";
 
 
 const useAddToCart = (data) => {
@@ -21,7 +21,7 @@ const useAddToCart = (data) => {
         if (user) {
             const cartObject = { drugId: _id, image, form, brand, dose, generic, quantity: 1, productType: "strip", subTotal: price_per_unit * 10, price_per_unit, userEmail: user.email }
             setCartPostStatus("loading")
-            fetch('http://localhost:3000/carts', {
+            fetch('https://sheba-server.vercel.app/carts', {
                 method: "POST",
                 headers: {
                     "Content-type": "Application/json"
@@ -43,7 +43,7 @@ const useAddToCart = (data) => {
   
 
     const handleDelete = ()=>{
-        fetch(`http://localhost:3000/drugs/all-drugs/${_id}`,{
+        fetch(`https://sheba-server.vercel.app/drugs/all-drugs/${_id}`,{
             method: "DELETE"
         })
         .then(()=>{

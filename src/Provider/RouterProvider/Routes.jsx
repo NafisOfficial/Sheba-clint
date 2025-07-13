@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import PrivateRoute from "../../Component/Shared/PrivateRoute/PrivateRoute";
 import Dashbord from "../../Layout/Dashbord/Dashbord";
 import Main from "../../Layout/Main/Main";
+import AddProduct from "../../Pages/AddProduct/AddProduct";
 import AllMedicine from "../../Pages/AllMedicine/AllMedicine";
 import Carts from "../../Pages/Carts/Carts";
 import CheckOut from "../../Pages/CheckOut/CheckOut";
@@ -21,9 +22,8 @@ import Payment from "../../Pages/Payment/Payment";
 import Profile from "../../Pages/Profile/Profile";
 import SignUp from "../../Pages/SignUp/SignUp";
 import SuccessTr from "../../Pages/SuccessTr/SuccessTr";
-import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
-import AddProduct from "../../Pages/AddProduct/AddProduct";
 import UpdateProduct from "../../Pages/UpdateProduct/UpdateProduct";
+import UpdateProfile from "../../Pages/UpdateProfile/UpdateProfile";
 
 
 export const router = createBrowserRouter([
@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
     {
       path: 'all-medicine',
       element:<AllMedicine/>,
-      loader:()=>fetch("http://localhost:3000/drugs/all-drugs")
+      loader:()=>fetch("https://sheba-server.vercel.app/drugs/all-drugs")
     },
     {
       path:'update-profile',
@@ -85,7 +85,7 @@ export const router = createBrowserRouter([
       element:<DrugDetails/>,
       loader:({params})=>{
         const drugId = params._id;
-        return fetch(`http://localhost:3000/drugs/single-drug/${drugId}`)
+        return fetch(`https://sheba-server.vercel.app/drugs/single-drug/${drugId}`)
                 .then(res=>res.json())
                 .then(drug=>{
                   return drug.data
@@ -119,7 +119,7 @@ export const router = createBrowserRouter([
       element:<DrugDetails/>,
       loader:({params})=>{
         const drugId = params._id;
-        return fetch(`http://localhost:3000/drugs/single-drug/${drugId}`)
+        return fetch(`https://sheba-server.vercel.app/drugs/single-drug/${drugId}`)
                 .then(res=>res.json())
                 .then(drug=>{
                   return drug.data

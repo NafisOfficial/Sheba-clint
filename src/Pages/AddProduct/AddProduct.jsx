@@ -35,7 +35,7 @@ const AddProduct = () => {
             formData.append(key,product[key]);
         }
 
-        fetch("http://localhost:3000/drugs/all-drugs",{
+        fetch("https://sheba-server.vercel.app/drugs/all-drugs",{
             method: "POST",
             body: formData
         }).then(()=>{

@@ -34,7 +34,7 @@ const SignUp = () => {
                     photoURL: "https://i.ibb.co/GtWpN1b/image.png"
                 })
                     .then(() => {
-                        fetch('http://localhost:3000/users', {
+                        fetch('https://sheba-server.vercel.app/users', {
                             method: "POST",
                             headers: {
                                 'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ const SignUp = () => {
                 userObject.photoURl = user?.photoURL || "https://i.ibb.co/GtWpN1b/image.png"
                  userObject.role = "user";
 
-                fetch('http://localhost:3000/users', {
+                fetch('https://sheba-server.vercel.app/users', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import DrugCard from "../../Component/Shared/DrugCard/DrugCard";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import DrugCard from "../../Component/Shared/DrugCard/DrugCard";
 
 
 const ManageProducts = () => {
@@ -16,7 +16,7 @@ const ManageProducts = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:3000/drugs/limited-drugs?page=${page}`)
+        fetch(`https://sheba-server.vercel.app/drugs/limited-drugs?page=${page}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error("There was a server side error");

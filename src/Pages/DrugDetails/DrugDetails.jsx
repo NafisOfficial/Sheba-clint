@@ -23,7 +23,7 @@ const DrugDetails = () => {
         if (user) {
             const cartObject = { drugId: _id, image, form, brand, dose, generic, quantity: 1, productType: "strip", subTotal: price_per_unit*10, price_per_unit, userEmail: user.email }
             setCartPostStatus("loading")
-            fetch('http://localhost:3000/carts', {
+            fetch('https://sheba-server.vercel.app/carts', {
                 method: "POST",
                 headers: {
                     "Content-type": "Application/json"
@@ -79,7 +79,7 @@ const DrugDetails = () => {
                             <p>Generic: {drug?.generic}</p>
                             <p>Company: {drug?.company_name}</p>
                             <div className="flex items-center justify-between">
-                                <p>Per unit {drug?.price_per_unit}: BDT</p>
+                                <p>Per unit: {drug?.price_per_unit} BDT</p>
                                 {handleCartCurrentStatus()}
                             </div>
                         </div>
