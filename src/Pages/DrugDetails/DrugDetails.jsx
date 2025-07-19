@@ -53,7 +53,7 @@ const DrugDetails = () => {
 
     const handleCartCurrentStatus = () => {
         if(editAble){
-             return <Link to="/dashboard/product/update" className="btn btn-sm ms-auto btn-info rounded-full">Update</Link>
+             return <Link to={`/dashboard/product/update/${_id}`} className="btn btn-sm ms-auto btn-info rounded-full">Update</Link>
         }
         if (cartPostStatus === "notPosted") {
             return <button onClick={addToCart} className="btn btn-sm ms-auto btn-info rounded-full"><IoCartOutline className="text-xl" /></button>

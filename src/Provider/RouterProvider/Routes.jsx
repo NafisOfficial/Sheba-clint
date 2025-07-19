@@ -111,8 +111,17 @@ export const router = createBrowserRouter([
       element:<AddProduct/>
     },
     {
-      path: "/dashboard/product/update",
-      element:<UpdateProduct/>
+      path: "/dashboard/product/update/:id",
+      element:<UpdateProduct/>,
+      loader: ({params})=>{
+        const {id} = params;
+        return fetch(`http://localhost:3000/drugs/single-drug/${id}`)
+        .then(res=>res.json())
+        .then((singleDrug)=>{
+          return singleDrug.data
+        })
+        .catch(()=>toast.error("Failed to get drug"))
+      }
     },
     {
       path:"/dashboard/details/:_id",
