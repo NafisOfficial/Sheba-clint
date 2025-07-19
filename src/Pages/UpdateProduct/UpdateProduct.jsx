@@ -11,10 +11,10 @@ const UpdateProduct = () => {
     const data = useLoaderData();
     const navigate = useNavigate();
 
-    const { _id,image, brand, dose, form, generic, company_name, price_per_unit, indications, interaction, mode_of_action, precautions_and_warnings, pregnancy_and_lactation, side_effects } = data
+    const { _id, image, brand, dose, form, generic, company_name, price_per_unit, indications, interaction, mode_of_action, precautions_and_warnings, pregnancy_and_lactation, side_effects } = data
 
 
-    const handleSubmit=(event)=>{
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         const target = event.target;
@@ -31,22 +31,22 @@ const UpdateProduct = () => {
         const precautions_and_warnings = target?.precautions_and_warnings?.value || "";
         const pregnancy_and_lactation = target?.pregnancy_and_lactation?.value || "";
         const interaction = target?.interaction?.value || "";
-        
-        const product = {brand,dose,form,company_name,generic, price_per_unit, unit_per_strip, indications, mode_of_action, side_effects, precautions_and_warnings, pregnancy_and_lactation, interaction};
+
+        const product = { brand, dose, form, company_name, generic, price_per_unit, unit_per_strip, indications, mode_of_action, side_effects, precautions_and_warnings, pregnancy_and_lactation, interaction };
 
 
-        fetch(`http://localhost:3000/drugs/update/${_id}`,{
-                    method: "PATCH",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify(product)
-                }).then(()=>{
-                    navigate(`/dashboard/details/${_id}`);
-                    toast.success("Data updated");
-                }).catch(()=>{
-                    toast.error("Filed to update data");
-                })
+        fetch(`https://sheba-server.vercel.app/drugs/update/${_id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(product)
+        }).then(() => {
+            navigate(`/dashboard/details/${_id}`);
+            toast.success("Data updated");
+        }).catch(() => {
+            toast.error("Filed to update data");
+        })
     }
 
     return (

@@ -1,6 +1,6 @@
 
 import {
-    createBrowserRouter,
+  createBrowserRouter,
 } from "react-router-dom";
 import { toast } from "react-toastify";
 import PrivateRoute from "../../Component/Shared/PrivateRoute/PrivateRoute";
@@ -115,7 +115,7 @@ export const router = createBrowserRouter([
       element:<UpdateProduct/>,
       loader: ({params})=>{
         const {id} = params;
-        return fetch(`http://localhost:3000/drugs/single-drug/${id}`)
+        return fetch(`https://sheba-server.vercel.app/drugs/single-drug/${id}`)
         .then(res=>res.json())
         .then((singleDrug)=>{
           return singleDrug.data
