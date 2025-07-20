@@ -25,7 +25,6 @@ const SignUp = () => {
         userObject.name = name;
         userObject.email = email;
         userObject.photoURl = "https://i.ibb.co/GtWpN1b/image.png";
-        userObject.role = "user";
 
         handleSignUp(email, password)
             .then(() => {
@@ -34,20 +33,28 @@ const SignUp = () => {
                     photoURL: "https://i.ibb.co/GtWpN1b/image.png"
                 })
                     .then(() => {
-                        fetch('https://sheba-server.vercel.app/users', {
+                        fetch('http://localhost:3000/users/signup', {
                             method: "POST",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify(userObject)
                         }
-                        )
+                        ).then((res) => res.json())
+                            .then((datas) => {
+                                const {token} = datas.data;
+                                console.log(token);
+                                localStorage.setItem("token", token);
+                                navigate(from, { replace: true });
+                                toast.success("Signup successful");
+                            })
+                            .catch(() => {
+                                toast.error("Failed to signup")
+                            })
                         isLoading(false);
-                        navigate(from, { replace: true });
-                        toast.success("Signup successful");
                     })
                     .catch(() => {
-                        setErrorMessage("Failed to update user !");
+                        toast.error("Failed to update user !");
                     })
             })
             .catch(() => {
@@ -65,9 +72,8 @@ const SignUp = () => {
                 userObject.name = user?.displayName;
                 userObject.email = user?.email;
                 userObject.photoURl = user?.photoURL || "https://i.ibb.co/GtWpN1b/image.png"
-                 userObject.role = "user";
 
-                fetch('https://sheba-server.vercel.app/users', {
+                fetch('https://sheba-server.vercel.app/users/signup', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'

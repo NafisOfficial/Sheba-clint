@@ -6,26 +6,36 @@ import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 const Login = () => {
 
     //hooks
-    const {handleLogin,isLoading} = useContext(AuthContext);
-    const [errorMessage,setErrorMessage] = useState("")
+    const { handleLogin, isLoading } = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState("")
     const navigate = useNavigate();
     const location = useLocation();
     const from = location?.state?.from?.pathname || "/";
 
-    const login=(event)=>{
+    const login = (event) => {
         event.preventDefault();
         const Email = event.target.email.value;
         const Password = event.target.password.value;
 
-        handleLogin(Email,Password)
-        .then(()=>{
-            isLoading(false);
-            navigate(from,{replace: true})
-            toast.success("Login successful")
-        })
-        .catch(()=>{
-            setErrorMessage("Please check your email or password is not correct")
-        })
+        handleLogin(Email, Password)
+            .then(async () => {
+                isLoading(false);
+                const res = await fetch("http://localhost:3000/users/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "Application/json"
+                    },
+                    body: JSON.stringify({email: Email})
+                });
+                const json = await res.json()
+                const {token} = json.data;
+                localStorage.setItem("token", token);
+                navigate(from, { replace: true })
+                toast.success("Login successful");
+            })
+            .catch(() => {
+                setErrorMessage("Please check your email or password is not correct")
+            })
     }
 
     // Todos :: Show and hide password and Password validation
@@ -48,7 +58,7 @@ const Login = () => {
                         <div className='md:mt-5 md:text-left md:mb-0 my-3 text-center'>
                             <input type="submit" className='btn btn-md btn-info px-10' value="login" />
                         </div>
-                        
+
                     </Form>
                 </div>
                 <div className='flex flex-col md:gap-10 gap-5 px-10 text-white bg-[#f0be61] md:w-4/12 w-full text-center justify-center items-center'>

@@ -3,6 +3,7 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import { toast } from "react-toastify";
+import CheckAdmin from "../../Component/Shared/CheckAdmin/CheckAdmin";
 import PrivateRoute from "../../Component/Shared/PrivateRoute/PrivateRoute";
 import Dashbord from "../../Layout/Dashbord/Dashbord";
 import Main from "../../Layout/Main/Main";
@@ -100,19 +101,19 @@ export const router = createBrowserRouter([
     element: <Dashbord />,
     children:[{
       path: "/dashboard/manage-users",
-      element:<ManageUser/>
+      element:<CheckAdmin><ManageUser/></CheckAdmin>
     },
     {
       path:"/dashboard/manage-products",
-      element:<ManageProducts/>
+      element:<CheckAdmin><ManageProducts/></CheckAdmin>
     },
     {
       path: "/dashboard/add-products",
-      element:<AddProduct/>
+      element:<CheckAdmin><AddProduct/></CheckAdmin>
     },
     {
       path: "/dashboard/product/update/:id",
-      element:<UpdateProduct/>,
+      element:<CheckAdmin><UpdateProduct/></CheckAdmin>,
       loader: ({params})=>{
         const {id} = params;
         return fetch(`https://sheba-server.vercel.app/drugs/single-drug/${id}`)
@@ -125,7 +126,7 @@ export const router = createBrowserRouter([
     },
     {
       path:"/dashboard/details/:_id",
-      element:<DrugDetails/>,
+      element:<CheckAdmin><DrugDetails/></CheckAdmin>,
       loader:({params})=>{
         const drugId = params._id;
         return fetch(`https://sheba-server.vercel.app/drugs/single-drug/${drugId}`)
@@ -138,7 +139,7 @@ export const router = createBrowserRouter([
     },
     {
       path: "/dashboard/manage-orders",
-      element:<ManageOrder/>
+      element:<CheckAdmin><ManageOrder/></CheckAdmin>
     }
   ]
   }

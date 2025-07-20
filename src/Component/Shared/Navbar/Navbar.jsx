@@ -9,6 +9,7 @@ import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
 import { StatusContext } from '../../../Provider/StatusProvider/StatusProvider';
 import useGetSearchProduct from '../../../Hooks/useGetSearchProduct';
 import Search from '../Search/Search';
+import { jwtDecode } from 'jwt-decode';
 
 
 const Navbar = () => {
@@ -20,6 +21,7 @@ const Navbar = () => {
     const [searchInput, getSearchInput] = useState();
     const [isSearchBarOpen, setSearchBarOpen] = useState(false);
     const [isLoadingForSearch, searchedData] = useGetSearchProduct(searchInput);
+    const [admin, setAdmin] = useState(false);
     const searchRef = useRef();
     const location = useLocation();
 
@@ -40,12 +42,25 @@ const Navbar = () => {
         setSearchBarOpen(false);
     }, [location?.pathname]);
 
+    // admin check
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const decoded = jwtDecode(token);
+            const role = decoded.role;
+            if (role === "admin") {
+                setAdmin(true);
+            }
+        }
+    }, [user])
+
 
     // handler function 
     const signOut = () => {
         handleLogOut()
             .then(() => {
                 toast.success("logout successful");
+                localStorage.removeItem("token");
             })
             .catch(() => {
                 toast.error("Internal server error");
@@ -64,7 +79,7 @@ const Navbar = () => {
         </div>
         <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box md:w-52 w-32">
             <li>
-                {Options["userUtility"]?.map((utility, index) => <Link key={index} to={utility?.path}>{utility?.tittle}</Link>)}
+                {Options["userUtility"]?.filter(item=>item.path !== "/dashboard/manage-users" || admin)?.map((utility, index) => <Link key={index} to={utility?.path}>{utility?.tittle}</Link>)}
             </li>
             <li><button onClick={signOut}>Logout</button></li>
         </ul>
@@ -112,20 +127,24 @@ export default Navbar;
 const Options = {
     navigation: [
         {
+            id: 1,
             tittle: "News",
             path: "/news"
         }
     ],
     userUtility: [
         {
+            id: 2,
             tittle: "Profile",
             path: "/profile"
         },
         {
+            id: 3,
             tittle: "History",
             path: "/history"
         },
         {
+            id: 4,
             tittle: "Admin Dashboard",
             path: "/dashboard/manage-users"
         }
