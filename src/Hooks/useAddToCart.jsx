@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthProvider/AuthProvider";
 import useCart from "./useCart";
 
-
+// manage add to cart button according to different status
 const useAddToCart = (data) => {
     const { _id, image, form, brand, dose, generic, price_per_unit } = data;
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const useAddToCart = (data) => {
     const [cartPostStatus, setCartPostStatus] = useState("notPosted")
     const [refetch] = useCart();
 
-
+    // add to cart func
     const addToCart = () => {
         if (user) {
             const cartObject = { drugId: _id, image, form, brand, dose, generic, quantity: 1, productType: "strip", subTotal: price_per_unit * 10, price_per_unit, userEmail: user.email }
@@ -41,7 +41,7 @@ const useAddToCart = (data) => {
     }
 
   
-
+    // delete all drug 
     const handleDelete = ()=>{
         fetch(`https://sheba-server.vercel.app/drugs/all-drugs/${_id}`,{
             method: "DELETE"
@@ -55,7 +55,7 @@ const useAddToCart = (data) => {
         })
     }
 
-
+    // showing different button according cart status
     const handleCartCurrentStatus = () => {
 
         if (location.pathname === "/dashboard/manage-products") {
