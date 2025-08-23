@@ -25,7 +25,7 @@ const Navbar = () => {
     const searchRef = useRef();
     const location = useLocation();
 
-    // hide search results
+    // hide search results after clicking 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -37,7 +37,8 @@ const Navbar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         }
     }, [])
-
+    
+    //closing search bar when redirect links
     useEffect(() => {
         setSearchBarOpen(false);
     }, [location?.pathname]);
@@ -69,8 +70,7 @@ const Navbar = () => {
 
 
 
-    // render HTML
-
+    // user profile with dropdown
     const userDropdown = <div className="dropdown dropdown-end">
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="md:w-10 w-7 rounded-full">
