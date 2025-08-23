@@ -13,7 +13,6 @@ dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -28,3 +27,4 @@ WhatToDo.js
 
 Temp1.jsx
 Temp2.jsx
+config.bat
